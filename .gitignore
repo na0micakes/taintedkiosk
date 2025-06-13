@@ -50,19 +50,3 @@ build/*
 *.z64
 *.map
 .assets-local.txt
-
-# Assets. Generally ignored, but ones with "custom" in the name are fine.
-/actors/**/*.png
-/assets/**/*.bin
-!/levels/**/*custom*.png
-!/levels/**/*custom*/**/*.png
-!/actors/**/*custom*.png
-!/actors/**/*custom*/**/*.png
-!/textures/**/*custom*.png
-!/textures/**/*custom*/**/*.png
-!/sound/**/*custom*.m64
-!/sound/**/*custom*/**/*.m64
-!/sound/**/*custom*.aiff
-!/sound/**/*custom*/**/*.aiff
-!/assets/**/*custom*.bin
-!/assets/**/*custom*/**/*.bin
