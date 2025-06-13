@@ -1,15 +1,10 @@
-# Prerequisites
-*.d
-
 # Object files
 *.o
-*.ko
 *.obj
 *.elf
 
 # Linker output
 *.ilk
-*.map
 *.exp
 
 # Precompiled Headers
@@ -32,8 +27,6 @@
 *.exe
 *.out
 *.app
-*.i*86
-*.x86_64
 *.hex
 
 # Debug files
@@ -42,11 +35,34 @@
 *.idb
 *.pdb
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# datadump
+/tools/ddump/*
+
+# Text editor remnants
+*.swp
+.vscode/*
+
+# General project-specific ignores
+doxygen/doxygen/*
+build/*
+*.dump
+*.mio0
+*.z64
+*.map
+.assets-local.txt
+
+# Assets. Generally ignored, but ones with "custom" in the name are fine.
+/actors/**/*.png
+/assets/**/*.bin
+!/levels/**/*custom*.png
+!/levels/**/*custom*/**/*.png
+!/actors/**/*custom*.png
+!/actors/**/*custom*/**/*.png
+!/textures/**/*custom*.png
+!/textures/**/*custom*/**/*.png
+!/sound/**/*custom*.m64
+!/sound/**/*custom*/**/*.m64
+!/sound/**/*custom*.aiff
+!/sound/**/*custom*/**/*.aiff
+!/assets/**/*custom*.bin
+!/assets/**/*custom*/**/*.bin
