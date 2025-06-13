@@ -1,6 +1,7 @@
 #include <ultra64.h>
 #include "sm64.h"
 #include "geo_commands.h"
+#include "headers.h"
 
 #include "make_const_nonconst.h"
 
@@ -15,4 +16,4 @@
 #include "sparkle/geo.inc.c"
 #include "water_splash/geo.inc.c"
 #include "sparkle_animation/geo.inc.c"
-#include "mario/geo.inc.c"
+#include "mario/hms_mario.sou"

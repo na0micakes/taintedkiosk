@@ -6977,6 +6977,7 @@ sound_ref .chan_2DA8
 sound_ref .sound_menu_click_file_select
 sound_ref .sound_menu_read_sign
 sound_ref .sound_menu_message_next_page
+sound_ref .sound_menu_coin_its_a_me_mario
 sound_ref .sound_menu_yoshi_gain_lives
 sound_ref .sound_menu_enter_pipe
 sound_ref .sound_menu_exit_pipe
@@ -6993,6 +6994,7 @@ sound_ref .sound_menu_exit_a_sign
 sound_ref .sound_menu_mario_castle_warp2
 #ifdef VERSION_JP
   sound_ref .sound_menu_message_next_page
+  sound_ref .sound_menu_coin_its_a_me_mario
   sound_ref .sound_menu_yoshi_gain_lives
   sound_ref .sound_menu_enter_pipe
   sound_ref .sound_menu_exit_pipe
@@ -7392,6 +7394,23 @@ chan_end
 layer_portamento 0x81, 15, 255
 layer_note1 51, 0x5, 73
 layer_end
+
+.sound_menu_coin_its_a_me_mario:
+chan_setbank 9
+chan_setinstr 3
+chan_setenvelope .envelope_3358
+chan_setvibratoextent 3
+chan_setvibratorate 60
+chan_setval 25
+chan_call .set_reverb
+chan_setlayer 0, .layer_2E28
+chan_setlayer 1, .layer_2E3D
+chan_setlayer 2, .layer_2E34
+chan_setval 70
+chan_call .delay
+chan_setbank 10
+chan_setinstr 8
+chan_end
 
 .layer_2E28:
 layer_call .layer_11E4
