@@ -3051,23 +3051,12 @@ layer_end
 
 .sound_general_coin:
 chan_setbank 9
-chan_setinstr 3
-chan_setenvelope .envelope_3358
-chan_setvibratoextent 3
-chan_setvibratorate 60
-chan_setval 25
-chan_call .set_reverb
+chan_setinstr 7
 chan_setlayer 0, .layer_11E4
 chan_end
 
 .layer_11E4:
-layer_transpose 24
-
-.layer_fn_11E6:
-layer_note1 25, 0x2, 40
-layer_note1 37, 0x7, 85
-layer_note1 30, 0x5, 40
-layer_note1 42, 0x37, 85
+layer_note1 39, 0x40, 120
 layer_end
 
 .sound_general_coin_water:
@@ -3118,7 +3107,6 @@ layer_end
 
 .layer_1254:
 layer_transpose 23
-layer_call .layer_fn_11E6
 layer_end
 
 .sound_general_short_star:

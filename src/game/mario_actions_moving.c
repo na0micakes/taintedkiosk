@@ -145,9 +145,7 @@ void slide_bonk(struct MarioState *m, u32 fastAction, u32 slowAction) {
 }
 
 s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 actionArg) {
-    if (m->flags & MARIO_WING_CAP) {
-        return set_mario_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
-    } else if (m->forwardVel > 20.0f) {
+    if (m->forwardVel > 20.0f) {
         return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
     } else {
         return set_mario_action(m, ACT_JUMP, 0);
@@ -417,20 +415,6 @@ s32 apply_slope_decel(struct MarioState *m, f32 decelCoef) {
     return stopped;
 }
 
-s32 update_decelerating_speed(struct MarioState *m) {
-    s32 stopped = FALSE;
-
-    if ((m->forwardVel = approach_f32(m->forwardVel, 0.0f, 1.0f, 1.0f)) == 0.0f) {
-        stopped = TRUE;
-    }
-
-    mario_set_forward_vel(m, m->forwardVel);
-    mario_update_moving_sand(m);
-    mario_update_windy_ground(m);
-
-    return stopped;
-}
-
 void update_walking_speed(struct MarioState *m) {
     f32 maxTargetSpeed;
     f32 targetSpeed;
@@ -506,7 +490,7 @@ s32 begin_braking_action(struct MarioState *m) {
         return set_mario_action(m, ACT_STANDING_AGAINST_WALL, 0);
     }
 
-    if (m->forwardVel >= 16.0f && m->floor->normal.y >= 0.17364818f) {
+    if (m->forwardVel >= 26.0f && m->floor->normal.y >= 0.17364818f) {
         return set_mario_action(m, ACT_BRAKING, 0);
     }
 
@@ -575,7 +559,7 @@ void anim_and_audio_for_walk(struct MarioState *m) {
                     } else {
                         //! (Speed Crash) If Mario's speed is more than 2^17.
                         val14 = (s32)(val04 / 4.0f * 0x10000);
-                        set_mario_anim_with_accel(m, MARIO_ANIM_WALKING, val14);
+                        set_mario_anim_with_accel(m, MARIO_ANIM_RUNNING, val14);
                         play_step_sound(m, 10, 49);
 
                         val0C = FALSE;
@@ -842,10 +826,6 @@ s32 act_move_punching(struct MarioState *m) {
         return set_mario_action(m, ACT_BEGIN_SLIDING, 0);
     }
 
-    if (m->actionState == 0 && (m->input & INPUT_A_DOWN)) {
-        return set_mario_action(m, ACT_JUMP_KICK, 0);
-    }
-
     m->actionState = 1;
 
     mario_update_punch_sequence(m);
@@ -1095,9 +1075,7 @@ s32 act_decelerating(struct MarioState *m) {
         }
     }
 
-    if (update_decelerating_speed(m)) {
-        return set_mario_action(m, ACT_IDLE, 0);
-    }
+    return set_mario_action(m, ACT_IDLE, 0);
 
     switch (perform_ground_step(m)) {
         case GROUND_STEP_LEFT_GROUND:
@@ -1159,9 +1137,7 @@ s32 act_hold_decelerating(struct MarioState *m) {
         return set_mario_action(m, ACT_HOLD_WALKING, 0);
     }
 
-    if (update_decelerating_speed(m)) {
-        return set_mario_action(m, ACT_HOLD_IDLE, 0);
-    }
+    return set_mario_action(m, ACT_HOLD_IDLE, 0);
 
     m->intendedMag *= 0.4f;
 
@@ -1431,8 +1407,7 @@ s32 common_slide_action_with_jump(struct MarioState *m, u32 stopAction, u32 jump
 
 s32 act_butt_slide(struct MarioState *m) {
     s32 cancel = common_slide_action_with_jump(m, ACT_BUTT_SLIDE_STOP, ACT_JUMP, ACT_BUTT_SLIDE_AIR,
-                                               MARIO_ANIM_SLIDE);
-    tilt_body_butt_slide(m);
+                                               MARIO_ANIM_SLIDE_MOTIONLESS);
     return cancel;
 }
 
@@ -1445,7 +1420,6 @@ s32 act_hold_butt_slide(struct MarioState *m) {
 
     cancel = common_slide_action_with_jump(m, ACT_HOLD_BUTT_SLIDE_STOP, ACT_HOLD_JUMP, ACT_HOLD_BUTT_SLIDE_AIR,
                                            MARIO_ANIM_SLIDING_ON_BOTTOM_WITH_LIGHT_OBJ);
-    tilt_body_butt_slide(m);
     return cancel;
 }
 

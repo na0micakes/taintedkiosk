@@ -184,7 +184,7 @@ u32 determine_interaction(struct MarioState *m, struct Object *o) {
     u32 action = m->action;
 
     if (action & ACT_FLAG_ATTACKING) {
-        if (action == ACT_PUNCHING || action == ACT_MOVE_PUNCHING || action == ACT_JUMP_KICK) {
+        if (action == ACT_PUNCHING || action == ACT_MOVE_PUNCHING) {
             s16 dYawToObject = mario_obj_angle_to_object(m, o) - m->faceAngle[1];
 
             if (m->flags & MARIO_PUNCHING) {
@@ -205,7 +205,7 @@ u32 determine_interaction(struct MarioState *m, struct Object *o) {
                     interaction = INT_TRIP;
                 }
             }
-        } else if (action == ACT_GROUND_POUND || action == ACT_TWIRLING) {
+        } else if (action == ACT_GROUND_POUND || action == ACT_TRIPLE_JUMP) {
             if (m->vel[1] < 0.0f) {
                 interaction = INT_GROUND_POUND_OR_TWIRL;
             }
@@ -1104,7 +1104,7 @@ u32 interact_tornado(struct MarioState *m, UNUSED u32 interactType, struct Objec
 #if ENABLE_RUMBLE
         queue_rumble_data(30, 60);
 #endif
-        return set_mario_action(m, ACT_TORNADO_TWIRLING, m->action == ACT_TWIRLING);
+        return set_mario_action(m, ACT_TORNADO_TWIRLING, m->action == ACT_TRIPLE_JUMP);
     }
 
     return FALSE;
@@ -1349,7 +1349,7 @@ u32 interact_hit_from_below(struct MarioState *m, UNUSED u32 interactType, struc
 #ifndef VERSION_JP
                 play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
 #endif
-                return drop_and_set_mario_action(m, ACT_TWIRLING, 0);
+                return drop_and_set_mario_action(m, ACT_TRIPLE_JUMP, 0);
             } else {
                 bounce_off_object(m, o, 30.0f);
             }
@@ -1387,7 +1387,7 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
 #ifndef VERSION_JP
                 play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
 #endif
-                return drop_and_set_mario_action(m, ACT_TWIRLING, 0);
+                return drop_and_set_mario_action(m, ACT_TRIPLE_JUMP, 0);
             } else {
                 bounce_off_object(m, o, 30.0f);
             }

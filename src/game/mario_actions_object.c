@@ -10,12 +10,6 @@
 #include "engine/math_util.h"
 #include "rumble_init.h"
 
-/**
- * Used by act_punching() to determine Mario's forward velocity during each
- * animation frame.
- */
-s8 sPunchingForwardVelocities[8] = { 0, 1, 1, 2, 3, 5, 7, 10 };
-
 void animated_stationary_ground_step(struct MarioState *m, s32 animation, u32 endAction) {
     stationary_ground_step(m);
     set_mario_animation(m, animation);
@@ -153,18 +147,9 @@ s32 act_punching(struct MarioState *m) {
         return check_common_action_exits(m);
     }
 
-    if (m->actionState == 0 && (m->input & INPUT_A_DOWN)) {
-        return set_mario_action(m, ACT_JUMP_KICK, 0);
-    }
-
     m->actionState = 1;
     if (m->actionArg == 0) {
         m->actionTimer = 7;
-    }
-
-    mario_set_forward_vel(m, sPunchingForwardVelocities[m->actionTimer]);
-    if (m->actionTimer > 0) {
-        m->actionTimer--;
     }
 
     mario_update_punch_sequence(m);

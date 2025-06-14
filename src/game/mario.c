@@ -777,7 +777,7 @@ static u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actio
     f32 forwardVel;
 
     if ((m->squishTimer != 0 || m->quicksandDepth >= 1.0f)
-        && (action == ACT_DOUBLE_JUMP || action == ACT_TWIRLING)) {
+        && (action == ACT_DOUBLE_JUMP || action == ACT_TRIPLE_JUMP)) {
         action = ACT_JUMP;
     }
 
@@ -794,7 +794,7 @@ static u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actio
             break;
 
         case ACT_TRIPLE_JUMP:
-            set_mario_y_vel_based_on_fspeed(m, 69.0f, 0.0f);
+            set_mario_y_vel_based_on_fspeed(m, 65.0f, 0.0f);
             m->forwardVel *= 0.8f;
             break;
 
@@ -879,9 +879,6 @@ static u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actio
             }
             break;
 
-        case ACT_JUMP_KICK:
-            m->vel[1] = 20.0f;
-            break;
     }
 
     m->peakHeight = m->pos[1];
@@ -1883,7 +1880,7 @@ void init_mario_from_save_file(void) {
         save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
     gMarioState->numKeys = 0;
 
-    gMarioState->numLives = 4;
+    gMarioState->numLives = 2;
     gMarioState->health = 0x880;
 
     gMarioState->prevNumStarsForDialog = gMarioState->numStars;

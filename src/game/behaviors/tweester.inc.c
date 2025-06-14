@@ -84,7 +84,7 @@ void tweester_act_chase(void) {
         cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
         print_debug_top_down_objectinfo("off ", 0);
 
-        if (gMarioStates[0].action == ACT_TWIRLING) {
+        if (gMarioStates[0].action == ACT_TRIPLE_JUMP) {
             o->oSubAction++;
         }
     } else {

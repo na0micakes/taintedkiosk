@@ -860,12 +860,6 @@ void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
-        if (gCurrCourseNum >= COURSE_MIN) {
-            gHudDisplay.flags |= HUD_DISPLAY_FLAG_COIN_COUNT;
-        } else {
-            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_COIN_COUNT;
-        }
-
         if (gHudDisplay.coins < gMarioState->numCoins) {
             if (gGlobalTimer & 1) {
                 u32 coinSound;
@@ -1164,11 +1158,7 @@ s32 init_level(void) {
             }
         }
 
-        if (val4) {
-            play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
-        } else {
-            play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0xFF, 0xFF, 0xFF);
-        }
+        play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0xFF, 0xFF, 0xFF);
 
         if (gCurrDemoInput == NULL) {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
@@ -1227,7 +1217,6 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     gCurrCourseNum = COURSE_NONE;
     gSavedCourseNum = COURSE_NONE;
     gCurrCreditsEntry = NULL;
-    gSpecialTripleJump = FALSE;
 
     init_mario_from_save_file();
     disable_warp_checkpoint();

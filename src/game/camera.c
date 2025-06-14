@@ -816,65 +816,12 @@ s16 look_down_slopes(s16 camYaw) {
 
     if (floor != NULL) {
         if (floor->type != SURFACE_WALL_MISC && floorDY > 0) {
-            if (floor->normal.z == 0.f && floorDY < 100.f) {
-                pitch = 0x05B0;
-            } else {
-                // Add the slope's angle of declination to the pitch
-                pitch += atan2s(40.f, floorDY);
-            }
+            // Add the slope's angle of declination to the pitch
+            pitch += atan2s(40.f, floorDY);
         }
     }
 
     return pitch;
-}
-
-/**
- * Look ahead to the left or right in the direction the player is facing
- * The calculation for pan[0] could be simplified to:
- *      yaw = -yaw;
- *      pan[0] = sins(sMarioCamState->faceAngle[1] + yaw) * sins(0xC00) * dist;
- * Perhaps, early in development, the pan used to be calculated for both the x and z directions
- *
- * Since this function only affects the camera's focus, Mario's movement direction isn't affected.
- */
-void pan_ahead_of_player(struct Camera *c) {
-    f32 dist;
-    s16 pitch;
-    s16 yaw;
-    Vec3f pan = { 0, 0, 0 };
-
-    // Get distance and angle from camera to Mario.
-    vec3f_get_dist_and_angle(c->pos, sMarioCamState->pos, &dist, &pitch, &yaw);
-
-    // The camera will pan ahead up to about 30% of the camera's distance to Mario.
-    pan[2] = sins(0xC00) * dist;
-
-    rotate_in_xz(pan, pan, sMarioCamState->faceAngle[1]);
-    // rotate in the opposite direction
-    yaw = -yaw;
-    rotate_in_xz(pan, pan, yaw);
-    // Only pan left or right
-    pan[2] = 0.f;
-
-    // If Mario is long jumping, or on a flag pole (but not at the top), then pan in the opposite direction
-    if (sMarioCamState->action == ACT_LONG_JUMP ||
-       (sMarioCamState->action != ACT_TOP_OF_POLE && (sMarioCamState->action & ACT_FLAG_ON_POLE))) {
-        pan[0] = -pan[0];
-    }
-
-    // Slowly make the actual pan, sPanDistance, approach the calculated pan
-    // If Mario is sleeping, then don't pan
-    if (sStatusFlags & CAM_FLAG_SLEEPING) {
-        approach_f32_asymptotic_bool(&sPanDistance, 0.f, 0.025f);
-    } else {
-        approach_f32_asymptotic_bool(&sPanDistance, pan[0], 0.025f);
-    }
-
-    // Now apply the pan. It's a dir vector to the left or right, rotated by the camera's yaw to Mario
-    pan[0] = sPanDistance;
-    yaw = -yaw;
-    rotate_in_xz(pan, pan, yaw);
-    vec3f_add(c->focus, pan);
 }
 
 s16 find_in_bounds_yaw_wdw_bob_thi(Vec3f pos, Vec3f origin, s16 yaw) {
@@ -935,7 +882,6 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     sAreaYaw = camYaw;
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);
     focus_on_mario(focus, pos, posY + yOff, focusY + yOff, sLakituDist + baseDist, pitch, camYaw);
-    pan_ahead_of_player(c);
     if (gCurrLevelArea == AREA_DDD_SUB) {
         camYaw = clamp_positions_and_find_yaw(pos, focus, 6839.f, 995.f, 5994.f, -3945.f);
     }
@@ -1162,7 +1108,6 @@ void mode_radial_camera(struct Camera *c) {
         pos[1] += 500.f;
     }
     set_camera_height(c, pos[1]);
-    pan_ahead_of_player(c);
 }
 
 /**
@@ -1235,7 +1180,6 @@ void mode_outward_radial_camera(struct Camera *c) {
         pos[1] += 500.f;
     }
     set_camera_height(c, pos[1]);
-    pan_ahead_of_player(c);
 }
 
 /**
@@ -1738,7 +1682,6 @@ void mode_fixed_camera(struct Camera *c) {
     }
     c->nextYaw = update_fixed_camera(c, c->focus, c->pos);
     c->yaw = c->nextYaw;
-    pan_ahead_of_player(c);
     vec3f_set(sCastleEntranceOffset, 0.f, 0.f, 0.f);
 }
 
@@ -1936,7 +1879,6 @@ s32 mode_behind_mario(struct Camera *c) {
         distCamToFocus = 800.f;
         vec3f_set_dist_and_angle(c->focus, c->pos, distCamToFocus, camPitch, camYaw);
     }
-    pan_ahead_of_player(c);
 
     return yaw;
 }
@@ -2384,7 +2326,6 @@ s16 update_default_camera(struct Camera *c) {
 void mode_default_camera(struct Camera *c) {
     set_fov_function(CAM_FOV_DEFAULT);
     c->nextYaw = update_default_camera(c);
-    pan_ahead_of_player(c);
 }
 
 /**

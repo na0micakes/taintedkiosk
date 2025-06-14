@@ -785,7 +785,7 @@ s32 act_tornado_twirling(struct MarioState *m) {
         if (m->vel[1] < 20.0f) {
             m->vel[1] = 20.0f;
         }
-        return set_mario_action(m, ACT_TWIRLING, 1);
+        return set_mario_action(m, ACT_TRIPLE_JUMP, 1);
     }
 
     if (m->angleVel[1] < 0x3000) {

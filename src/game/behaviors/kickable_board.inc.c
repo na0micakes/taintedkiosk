@@ -15,9 +15,6 @@ s32 check_mario_attacking(UNUSED s32 unused) {
         if (gMarioStates[0].action == ACT_SLIDE_KICK_SLIDE) {
             return 1;
         }
-        if (gMarioStates[0].action == ACT_JUMP_KICK) {
-            return 2;
-        }
         if (gMarioStates[0].action == ACT_WALL_KICK_AIR) {
             return 2;
         }
