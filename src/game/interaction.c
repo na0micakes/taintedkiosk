@@ -217,8 +217,6 @@ u32 determine_interaction(struct MarioState *m, struct Object *o) {
             if (m->vel[1] < 0.0f && m->actionState == 0) {
                 interaction = INT_GROUND_POUND_OR_TWIRL;
             }
-        } else if (action == ACT_SLIDE_KICK || action == ACT_SLIDE_KICK_SLIDE) {
-            interaction = INT_SLIDE_KICK;
         } else if (action & ACT_FLAG_RIDING_SHELL) {
             interaction = INT_FAST_ATTACK_OR_SHELL;
         } else if (m->forwardVel <= -26.0f || 26.0f <= m->forwardVel) {
@@ -660,7 +658,6 @@ void bounce_back_from_attack(struct MarioState *m, u32 interaction) {
         }
 
         set_camera_shake_from_hit(SHAKE_ATTACK);
-        m->particleFlags |= PARTICLE_TRIANGLE;
     }
 
     if (interaction & (INT_PUNCH | INT_KICK | INT_TRIP | INT_FAST_ATTACK_OR_SHELL)) {
@@ -1767,11 +1764,9 @@ void check_kick_or_punch_wall(struct MarioState *m) {
 
                 mario_set_forward_vel(m, -48.0f);
                 play_sound(SOUND_ACTION_HIT_2, m->marioObj->header.gfx.cameraToObject);
-                m->particleFlags |= PARTICLE_TRIANGLE;
             } else if (m->action & ACT_FLAG_AIR) {
                 mario_set_forward_vel(m, -16.0f);
                 play_sound(SOUND_ACTION_HIT_2, m->marioObj->header.gfx.cameraToObject);
-                m->particleFlags |= PARTICLE_TRIANGLE;
             }
         }
     }
