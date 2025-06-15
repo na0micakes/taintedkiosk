@@ -251,8 +251,6 @@ void obj_explode_and_spawn_coins(f32 mistParticleSize, s32 sp1C);
 void obj_set_collision_data(struct Object *obj, const void *segAddr);
 void cur_obj_if_hit_wall_bounce_away(void);
 s32 cur_obj_hide_if_mario_far_away_y(f32 distY);
-Gfx *geo_offset_klepto_held_object(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx);
-Gfx *geo_offset_klepto_debug(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx);
 s32 obj_is_hidden(struct Object *obj);
 void enable_time_stop(void);
 void disable_time_stop(void);

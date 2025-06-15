@@ -39,8 +39,6 @@ static const LevelScript script_func_local_1[] = {
     OBJECT(/*model*/ MODEL_RR_SWINGING_PLATFORM,        /*pos*/ -2213, -2582,  6257, /*angle*/  0,   0,   0, /*bhvParam*/ 0, /*bhv*/ bhvSwingPlatform),
     OBJECT(/*model*/ MODEL_NONE,                        /*pos*/     0,     0,     0, /*angle*/  0,   0,   0, /*bhvParam*/ 0, /*bhv*/ bhvDonutPlatformSpawner),
     OBJECT(/*model*/ MODEL_RR_ELEVATOR_PLATFORM,        /*pos*/ -2684,  1546,   -36, /*angle*/  0,   0,   0, /*bhvParam*/ BPARAM2(0x05), /*bhv*/ bhvRRElevatorPlatform),
-    OBJECT(/*model*/ MODEL_RR_TRICKY_TRIANGLES,         /*pos*/  5862, -1347,  6564, /*angle*/  0,   0,   0, /*bhvParam*/ BPARAM2(0x02), /*bhv*/ bhvAnimatesOnFloorSwitchPress),
-    OBJECT(/*model*/ MODEL_PURPLE_SWITCH,               /*pos*/  4428, -1936,  6564, /*angle*/  0,   0,   0, /*bhvParam*/ 0, /*bhv*/ bhvFloorSwitchAnimatesObject),
     OBJECT(/*model*/ MODEL_NONE,                        /*pos*/   614, -2857,  3671, /*angle*/  0,   0,   0, /*bhvParam*/ BPARAM2(204),  /*bhv*/ bhvPoleGrabbing),
     OBJECT(/*model*/ MODEL_NONE,                        /*pos*/   621, -4598,  7362, /*angle*/  0,   0,   0, /*bhvParam*/ BPARAM2(117),  /*bhv*/ bhvPoleGrabbing),
     OBJECT(/*model*/ MODEL_NONE,                        /*pos*/  5119,  3819,  3325, /*angle*/  0,   0,   0, /*bhvParam*/ BPARAM2(97),   /*bhv*/ bhvPoleGrabbing),

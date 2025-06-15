@@ -16,11 +16,6 @@
 #include "make_const_nonconst.h"
 #include "levels/totwc/header.h"
 
-static const LevelScript script_func_local_1[] = {
-    OBJECT(/*model*/ MODEL_CAP_SWITCH, /*pos*/   0, -2047, 10, /*angle*/ 0, 0, 0, /*bhvParam*/ 0, /*bhv*/ bhvCapSwitch),
-    RETURN(),
-};
-
 static const LevelScript script_func_local_2[] = {
     OBJECT(/*model*/ MODEL_NONE,       /*pos*/ 800, -1700,  0, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_1), /*bhv*/ bhvHiddenRedCoinStar),
     RETURN(),
@@ -38,7 +33,6 @@ const LevelScript level_totwc_entry[] = {
     ALLOC_LEVEL_POOL(),
     MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
     JUMP_LINK(script_func_global_1),
-    JUMP_LINK(script_func_global_9),
     LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03, totwc_geo_000160),
 
     AREA(/*index*/ 1, totwc_geo_000188),
@@ -48,7 +42,6 @@ const LevelScript level_totwc_entry[] = {
         WARP_NODE(/*id*/ WARP_NODE_SUCCESS,    /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 1, /*destNode*/ WARP_NODE_26, /*flags*/ WARP_NO_CHECKPOINT),
         WARP_NODE(/*id*/ WARP_NODE_DEATH,      /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 1, /*destNode*/ WARP_NODE_23, /*flags*/ WARP_NO_CHECKPOINT),
         JUMP_LINK(script_func_local_2),
-        JUMP_LINK(script_func_local_1),
         TERRAIN(/*terrainData*/ totwc_seg7_collision),
         MACRO_OBJECTS(/*objList*/ totwc_seg7_macro_objs),
         SHOW_DIALOG(/*index*/ 0x00, DIALOG_131),

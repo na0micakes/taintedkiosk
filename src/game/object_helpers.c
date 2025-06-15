@@ -2492,29 +2492,6 @@ s32 cur_obj_hide_if_mario_far_away_y(f32 distY) {
     }
 }
 
-Gfx *geo_offset_klepto_held_object(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx) {
-    if (callContext == GEO_CONTEXT_RENDER) {
-        ((struct GraphNodeTranslationRotation *) node->next)->translation[0] = 300;
-        ((struct GraphNodeTranslationRotation *) node->next)->translation[1] = 300;
-        ((struct GraphNodeTranslationRotation *) node->next)->translation[2] = 0;
-    }
-
-    return NULL;
-}
-
-Gfx *geo_offset_klepto_debug(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx) {
-    if (callContext == GEO_CONTEXT_RENDER) {
-        ((struct GraphNodeTranslationRotation *) node->next)->translation[0] = gDebugInfo[DEBUG_PAGE_EFFECTINFO][0];
-        ((struct GraphNodeTranslationRotation *) node->next)->translation[1] = gDebugInfo[DEBUG_PAGE_EFFECTINFO][1];
-        ((struct GraphNodeTranslationRotation *) node->next)->translation[2] = gDebugInfo[DEBUG_PAGE_EFFECTINFO][2];
-        ((struct GraphNodeTranslationRotation *) node->next)->rotation[0]    = gDebugInfo[DEBUG_PAGE_EFFECTINFO][3];
-        ((struct GraphNodeTranslationRotation *) node->next)->rotation[1]    = gDebugInfo[DEBUG_PAGE_EFFECTINFO][4];
-        ((struct GraphNodeTranslationRotation *) node->next)->rotation[2]    = gDebugInfo[DEBUG_PAGE_EFFECTINFO][5];
-    }
-
-    return NULL;
-}
-
 s32 obj_is_hidden(struct Object *obj) {
     if (obj->header.gfx.node.flags & GRAPH_RENDER_INVISIBLE) {
         return TRUE;

@@ -82,7 +82,6 @@ static const LevelScript script_func_local_4[] = {
     OBJECT          (/*model*/ MODEL_NONE,            /*pos*/  5996,    2,  -390, /*angle*/ 0, 315, 0, /*bhvParam*/ 0, /*bhv*/ bhvBouncingFireball),
     OBJECT          (/*model*/ MODEL_NONE,            /*pos*/  5423,    2, -1991, /*angle*/ 0, 315, 0, /*bhvParam*/ 0, /*bhv*/ bhvBouncingFireball),
     OBJECT          (/*model*/ MODEL_NONE,            /*pos*/  4921,    2, -1504, /*angle*/ 0,  90, 0, /*bhvParam*/ 0, /*bhv*/ bhvBouncingFireball),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/  1050,  550,  6200, /*angle*/ 0,   0, 0, /*bhvParam*/ BPARAM2(EXCLAMATION_BOX_BP_KOOPA_SHELL), /*bhv*/ bhvExclamationBox, /*acts*/ ACT_5 | ACT_6),
     RETURN(),
 };
 

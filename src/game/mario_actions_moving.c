@@ -47,14 +47,6 @@ struct LandingAction sDoubleJumpLandAction = {
     4, 5, ACT_FREEFALL, ACT_DOUBLE_JUMP_LAND_STOP, ACT_JUMP, ACT_FREEFALL, ACT_BEGIN_SLIDING,
 };
 
-struct LandingAction sTripleJumpLandAction = {
-    4, 0, ACT_FREEFALL, ACT_TRIPLE_JUMP_LAND_STOP, ACT_UNINITIALIZED, ACT_FREEFALL, ACT_BEGIN_SLIDING,
-};
-
-struct LandingAction sBackflipLandAction = {
-    4, 0, ACT_FREEFALL, ACT_BACKFLIP_LAND_STOP, ACT_BACKFLIP, ACT_FREEFALL, ACT_BEGIN_SLIDING,
-};
-
 Mat4 sFloorAlignMatrix[2];
 
 s16 tilt_body_running(struct MarioState *m) {
@@ -1321,12 +1313,6 @@ s32 act_burning_ground(struct MarioState *m) {
     return FALSE;
 }
 
-void tilt_body_butt_slide(struct MarioState *m) {
-    s16 intendedDYaw = m->intendedYaw - m->faceAngle[1];
-    m->marioBodyState->torsoAngle[0] = (s32)(5461.3335f * m->intendedMag / 32.0f * coss(intendedDYaw));
-    m->marioBodyState->torsoAngle[2] = (s32)(-(5461.3335f * m->intendedMag / 32.0f * sins(intendedDYaw)));
-}
-
 void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32 animation) {
     Vec3f pos;
 
@@ -1770,38 +1756,6 @@ s32 act_double_jump_land(struct MarioState *m) {
     return FALSE;
 }
 
-s32 act_triple_jump_land(struct MarioState *m) {
-    m->input &= ~INPUT_A_PRESSED;
-
-    if (common_landing_cancels(m, &sTripleJumpLandAction, set_jumping_action)) {
-        return TRUE;
-    }
-
-    if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, MARIO_MARIO_SOUND_PLAYED);
-    }
-
-    common_landing_action(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_FREEFALL);
-    return FALSE;
-}
-
-s32 act_backflip_land(struct MarioState *m) {
-    if (!(m->input & INPUT_Z_DOWN)) {
-        m->input &= ~INPUT_A_PRESSED;
-    }
-
-    if (common_landing_cancels(m, &sBackflipLandAction, set_jumping_action)) {
-        return TRUE;
-    }
-
-    if (!(m->input & INPUT_NONZERO_ANALOG)) {
-        play_sound_if_no_flag(m, SOUND_MARIO_HAHA, MARIO_MARIO_SOUND_PLAYED);
-    }
-
-    common_landing_action(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_FREEFALL);
-    return FALSE;
-}
-
 s32 quicksand_jump_land_action(struct MarioState *m, s32 animation1, s32 animation2, u32 endAction,
                                u32 airAction) {
     if (m->actionTimer++ < 6) {
@@ -1908,8 +1862,6 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         case ACT_SIDE_FLIP_LAND:           cancel = act_side_flip_land(m);           break;
         case ACT_HOLD_JUMP_LAND:           cancel = act_hold_jump_land(m);           break;
         case ACT_HOLD_FREEFALL_LAND:       cancel = act_hold_freefall_land(m);       break;
-        case ACT_TRIPLE_JUMP_LAND:         cancel = act_triple_jump_land(m);         break;
-        case ACT_BACKFLIP_LAND:            cancel = act_backflip_land(m);            break;
         case ACT_QUICKSAND_JUMP_LAND:      cancel = act_quicksand_jump_land(m);      break;
         case ACT_HOLD_QUICKSAND_JUMP_LAND: cancel = act_hold_quicksand_jump_land(m); break;
     }

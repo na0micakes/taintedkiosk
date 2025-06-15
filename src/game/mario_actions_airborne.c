@@ -26,7 +26,7 @@ void play_far_fall_sound(struct MarioState *m) {
     if (!(action & ACT_FLAG_INVULNERABLE) && action != ACT_TRIPLE_JUMP && action != ACT_FLYING
         && !(m->flags & MARIO_UNKNOWN_18)) {
         if (m->peakHeight - m->pos[1] > 1150.0f) {
-            play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+            play_sound(SOUND_MARIO_ON_FIRE, m->marioObj->header.gfx.cameraToObject);
             m->flags |= MARIO_UNKNOWN_18;
         }
     }
@@ -496,7 +496,7 @@ s32 act_triple_jump(struct MarioState *m) {
 
     switch (perform_air_step(m, 0)) {
         case AIR_STEP_LANDED:
-            set_mario_action(m, ACT_TWIRL_LAND, 0);
+            set_mario_action(m, ACT_TRIPLE_JUMP_LAND, 0);
             break;
 
         case AIR_STEP_HIT_WALL:
@@ -510,22 +510,6 @@ s32 act_triple_jump(struct MarioState *m) {
 
     m->marioObj->header.gfx.angle[1] += m->twirlYaw;
 
-    return FALSE;
-}
-
-s32 act_backflip(struct MarioState *m) {
-    if (m->input & INPUT_Z_PRESSED) {
-        return set_mario_action(m, ACT_GROUND_POUND, 0);
-    }
-
-    play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_YAH_WAH_HOO);
-    common_air_action_step(m, ACT_BACKFLIP_LAND, MARIO_ANIM_BACKFLIP, 0);
-#if ENABLE_RUMBLE
-    if (m->action == ACT_BACKFLIP_LAND) {
-        queue_rumble_data(5, 40);
-    }
-#endif
-    play_flip_sounds(m, 2, 3, 17);
     return FALSE;
 }
 
@@ -1138,7 +1122,7 @@ s32 act_thrown_backward(struct MarioState *m) {
         landAction = ACT_BACKWARD_GROUND_KB;
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_ON_FIRE, MARIO_MARIO_SOUND_PLAYED);
 
     common_air_knockback_step(m, landAction, ACT_HARD_BACKWARD_GROUND_KB, 0x0002, m->forwardVel);
 
@@ -1156,7 +1140,7 @@ s32 act_thrown_forward(struct MarioState *m) {
         landAction = ACT_FORWARD_GROUND_KB;
     }
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_MARIO_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_ON_FIRE, MARIO_MARIO_SOUND_PLAYED);
 
     if (common_air_knockback_step(m, landAction, ACT_HARD_FORWARD_GROUND_KB, 0x002D, m->forwardVel)
         == AIR_STEP_NONE) {
@@ -1202,10 +1186,6 @@ s32 act_getting_blown(struct MarioState *m) {
         if (m->vel[1] < 0.0f && m->gettingBlownGravity < 4.0f) {
             m->gettingBlownGravity += 0.05f;
         }
-    }
-
-    if (++(m->actionTimer) == 20) {
-        mario_blow_off_cap(m, 50.0f);
     }
 
     mario_set_forward_vel(m, m->forwardVel);
@@ -1502,6 +1482,7 @@ s32 act_lava_boost(struct MarioState *m) {
     return FALSE;
 }
 
+// i was gonna do the flying thing but i dont feel like it lel so if you see this plz do it for me im tired
 s32 act_shot_from_cannon(struct MarioState *m) {
     if (m->area->camera->mode != CAMERA_MODE_BEHIND_MARIO) {
         m->statusForCamera->cameraEvent = CAM_EVENT_SHOT_FROM_CANNON;
@@ -1544,17 +1525,10 @@ s32 act_shot_from_cannon(struct MarioState *m) {
             break;
     }
 
-    if ((m->flags & MARIO_WING_CAP) && m->vel[1] < 0.0f) {
-        set_mario_action(m, ACT_FLYING, 0);
-    }
-
     if ((m->forwardVel -= 0.05) < 10.0f) {
         mario_set_forward_vel(m, 10.0f);
     }
-
-#if ENABLE_RUMBLE
-    reset_rumble_timers();
-#endif
+    
     return FALSE;
 }
 
@@ -1566,13 +1540,6 @@ s32 act_flying(struct MarioState *m) {
             set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
         }
         return set_mario_action(m, ACT_GROUND_POUND, 1);
-    }
-
-    if (!(m->flags & MARIO_WING_CAP)) {
-        if (m->area->camera->mode == CAMERA_MODE_BEHIND_MARIO) {
-            set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
-        }
-        return set_mario_action(m, ACT_FREEFALL, 0);
     }
 
     if (m->area->camera->mode != CAMERA_MODE_BEHIND_MARIO) {
@@ -1874,7 +1841,6 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
         case ACT_STEEP_JUMP:           cancel = act_steep_jump(m);           break;
         case ACT_BURNING_JUMP:         cancel = act_burning_jump(m);         break;
         case ACT_BURNING_FALL:         cancel = act_burning_fall(m);         break;
-        case ACT_BACKFLIP:             cancel = act_backflip(m);             break;
         case ACT_RIDING_SHELL_JUMP:
         case ACT_RIDING_SHELL_FALL:    cancel = act_riding_shell_air(m);     break;
         case ACT_DIVE:                 cancel = act_dive(m);                 break;

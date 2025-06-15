@@ -11,7 +11,6 @@
 #include "menu/title_screen.h"
 
 #include "levels/scripts.h"
-#include "levels/menu/header.h"
 
 #include "actors/common1.h"
 

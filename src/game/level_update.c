@@ -1158,7 +1158,7 @@ s32 init_level(void) {
             }
         }
 
-        play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0xFF, 0xFF, 0xFF);
+        play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x15, 0xFF, 0xFF, 0xFF);
 
         if (gCurrDemoInput == NULL) {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
@@ -1192,37 +1192,14 @@ s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
 }
 
 s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
-#ifdef VERSION_EU
-    s16 language = eu_get_language();
-    switch (language) {
-        case LANGUAGE_ENGLISH:
-            load_segment_decompress(0x19, _translation_en_mio0SegmentRomStart,
-                                    _translation_en_mio0SegmentRomEnd);
-            break;
-        case LANGUAGE_FRENCH:
-            load_segment_decompress(0x19, _translation_fr_mio0SegmentRomStart,
-                                    _translation_fr_mio0SegmentRomEnd);
-            break;
-        case LANGUAGE_GERMAN:
-            load_segment_decompress(0x19, _translation_de_mio0SegmentRomStart,
-                                    _translation_de_mio0SegmentRomEnd);
-            break;
-    }
-#endif
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
-    gNeverEnteredCastle = !save_file_exists(gCurrSaveFileNum - 1);
 
     gCurrLevelNum = levelNum;
     gCurrCourseNum = COURSE_NONE;
     gSavedCourseNum = COURSE_NONE;
-    gCurrCreditsEntry = NULL;
 
     init_mario_from_save_file();
-    disable_warp_checkpoint();
-    save_file_move_cap_to_default_location();
-    select_mario_cam_mode();
-    set_yoshi_as_not_dead();
 
     return levelNum;
 }

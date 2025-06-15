@@ -1,6 +1,5 @@
 // 0x070088AC - 0x070089C6
 const MacroObject totwc_seg7_macro_objs[] = {
-    MACRO_OBJECT(/*preset*/ macro_box_wing_cap,              /*yaw*/   0, /*pos*/     0, -1760,  -600),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical_flying, /*yaw*/  90, /*pos*/     0, -1000,  3000),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical_flying, /*yaw*/   0, /*pos*/ -3500,  -200,     0),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical_flying, /*yaw*/   0, /*pos*/  4500,  1400,     0),

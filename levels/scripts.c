@@ -29,7 +29,6 @@
 #include "actors/group16.h"
 #include "actors/group17.h"
 
-#include "levels/menu/header.h"
 #include "levels/intro/header.h"
 
 #include "level_headers.h"
@@ -97,11 +96,6 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_COIN_NO_SHADOW,   yellow_coin_no_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN,               blue_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN_NO_SHADOW,     blue_coin_no_shadow_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MARIOS_WINGED_METAL_CAP, marios_winged_metal_cap_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MARIOS_METAL_CAP,        marios_metal_cap_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MARIOS_WING_CAP,         marios_wing_cap_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MARIOS_CAP,              marios_cap_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MARIOS_CAP,              marios_cap_geo), // repeated
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_KEY_CUTSCENE,     bowser_key_cutscene_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_KEY,              bowser_key_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_FLAME_SHADOW,        red_flame_shadow_geo),
@@ -115,11 +109,11 @@ const LevelScript level_main_scripts_entry[] = {
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
     LOOP_BEGIN(),
-        EXECUTE(/*seg*/ 0x14, _menuSegmentRomStart, _menuSegmentRomEnd, level_main_menu_entry_2),
+        CALL(/*arg*/ 0, /*func*/ lvl_set_current_level),
+        GET_OR_SET(/*op*/ OP_SET, /*var*/ VAR_CURR_ACT_NUM),
         JUMP_LINK(script_exec_level_table),
         SLEEP(/*frames*/ 1),
     LOOP_UNTIL(/*op*/ OP_LT, /*arg*/ 0),
-    JUMP_IF(/*op*/ OP_EQ, /*arg*/ -1, script_L2),
     JUMP_IF(/*op*/ OP_EQ, /*arg*/ -2, goto_mario_head_regular),
     JUMP_IF(/*op*/ OP_EQ, /*arg*/ -3, goto_mario_head_dizzy),
     JUMP_IF(/*op*/ OP_EQ, /*arg*/ -8, script_L1),
@@ -128,10 +122,6 @@ const LevelScript level_main_scripts_entry[] = {
 
 static const LevelScript script_L1[] = {
     EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_splash_screen),
-};
-
-static const LevelScript script_L2[] = {
-    EXIT_AND_EXECUTE(/*seg*/ 0x0E, _endingSegmentRomStart, _endingSegmentRomEnd, level_ending_entry),
 };
 
 static const LevelScript goto_mario_head_regular[] = {
@@ -172,14 +162,10 @@ static const LevelScript script_exec_ ## folder [] = { \
 const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN_SWITCH,        blue_coin_switch_geo),
     LOAD_MODEL_FROM_GEO(MODEL_AMP,                     dAmpGeo),
-    LOAD_MODEL_FROM_GEO(MODEL_PURPLE_SWITCH,           purple_switch_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CHECKERBOARD_PLATFORM,   checkerboard_platform_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BREAKABLE_BOX,           breakable_box_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BREAKABLE_BOX_SMALL,     breakable_box_small_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_EXCLAMATION_BOX_OUTLINE, exclamation_box_outline_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_EXCLAMATION_BOX,         exclamation_box_geo),
     LOAD_MODEL_FROM_GEO(MODEL_GOOMBA,                  goomba_geo),
-    LOAD_MODEL_FROM_DL (MODEL_EXCLAMATION_POINT,       exclamation_box_outline_seg8_dl_08025F08, LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_SHELL,             koopa_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_METAL_BOX,               metal_box_geo),
     LOAD_MODEL_FROM_DL (MODEL_METAL_BOX_DL,            metal_box_dl,                             LAYER_OPAQUE),
@@ -233,7 +219,6 @@ const LevelScript script_func_global_6[] = {
     LOAD_MODEL_FROM_GEO(MODEL_POKEY_HEAD,              pokey_head_geo),
     LOAD_MODEL_FROM_GEO(MODEL_POKEY_BODY_PART,         pokey_body_part_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TWEESTER,                tweester_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_KLEPTO,                  klepto_geo),
     LOAD_MODEL_FROM_GEO(MODEL_EYEROK_LEFT_HAND,        eyerok_left_hand_geo),
     LOAD_MODEL_FROM_GEO(MODEL_EYEROK_RIGHT_HAND,       eyerok_right_hand_geo),
     RETURN(),
@@ -242,7 +227,6 @@ const LevelScript script_func_global_6[] = {
 const LevelScript script_func_global_7[] = {
     LOAD_MODEL_FROM_DL (MODEL_DL_MONTY_MOLE_HOLE,      monty_mole_hole_seg5_dl_05000840, LAYER_TRANSPARENT_DECAL),
     LOAD_MODEL_FROM_GEO(MODEL_MONTY_MOLE,              monty_mole_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_UKIKI,                   ukiki_geo),
     LOAD_MODEL_FROM_GEO(MODEL_FWOOSH,                  fwoosh_geo),
     RETURN(),
 };
@@ -252,13 +236,6 @@ const LevelScript script_func_global_8[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MR_BLIZZARD_HIDDEN,      mr_blizzard_hidden_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MR_BLIZZARD,             mr_blizzard_geo),
     LOAD_MODEL_FROM_GEO(MODEL_PENGUIN,                 penguin_geo),
-    RETURN(),
-};
-
-const LevelScript script_func_global_9[] = {
-    LOAD_MODEL_FROM_DL (MODEL_CAP_SWITCH_EXCLAMATION,  cap_switch_exclamation_seg5_dl_05002E00, LAYER_ALPHA),
-    LOAD_MODEL_FROM_GEO(MODEL_CAP_SWITCH,              cap_switch_geo),
-    LOAD_MODEL_FROM_DL (MODEL_CAP_SWITCH_BASE,         cap_switch_base_seg5_dl_05003120,        LAYER_OPAQUE),
     RETURN(),
 };
 

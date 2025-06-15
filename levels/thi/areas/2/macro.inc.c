@@ -1,7 +1,6 @@
 // 0x0700DEE4 - 0x0700E18E
 const MacroObject thi_seg7_area_2_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_bobomb_buddy_opens_cannon_1, /*yaw*/   0, /*pos*/  1902,  -767,  1318),
-    MACRO_OBJECT(/*preset*/ macro_floor_switch_hidden_objects, /*yaw*/   0, /*pos*/ -1380,  -766, -1770),
     MACRO_OBJECT(/*preset*/ macro_hidden_breakable_box,        /*yaw*/   0, /*pos*/ -1140,  -970, -1920),
     MACRO_OBJECT(/*preset*/ macro_hidden_breakable_box,        /*yaw*/   0, /*pos*/ -1140,  -970, -1720),
     MACRO_OBJECT(/*preset*/ macro_hidden_breakable_box,        /*yaw*/   0, /*pos*/  -940,  -970, -1920),
@@ -42,13 +41,11 @@ const MacroObject thi_seg7_area_2_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/ -1466,  -107,  -518),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/ -1466,  -151,  -162),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/   133,  -491, -1496),
-    MACRO_OBJECT(/*preset*/ macro_box_1up,                     /*yaw*/   0, /*pos*/ -1866,  -400,   311),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/  -380,  -480,   370),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/   -60,  -480,   370),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/ -1171,  -153,  1023),
     MACRO_OBJECT(/*preset*/ macro_tiny_goomba,                 /*yaw*/   0, /*pos*/  -923,   295,  -614),
     MACRO_OBJECT(/*preset*/ macro_tiny_goomba,                 /*yaw*/   0, /*pos*/  1466,  -460,   999),
-    MACRO_OBJECT(/*preset*/ macro_box_three_coins,             /*yaw*/   0, /*pos*/  1849,  -325,  -183),
     MACRO_OBJECT(/*preset*/ macro_tiny_goomba,                 /*yaw*/   0, /*pos*/  1033,  -162,   916),
     MACRO_OBJECT(/*preset*/ macro_tiny_goomba,                 /*yaw*/   0, /*pos*/  -550,   666,  -150),
     MACRO_OBJECT(/*preset*/ macro_fish_spawner_few_blue,       /*yaw*/   0, /*pos*/   383, -1022,  2133),

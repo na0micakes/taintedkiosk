@@ -357,14 +357,12 @@
 #define MODEL_POKEY_HEAD                  0x54        // pokey_head_geo
 #define MODEL_POKEY_BODY_PART             0x55        // pokey_body_part_geo
 #define MODEL_TWEESTER                    0x56        // tweester_geo
-#define MODEL_KLEPTO                      0x57        // klepto_geo
 #define MODEL_EYEROK_LEFT_HAND            0x58        // eyerok_left_hand_geo
 #define MODEL_EYEROK_RIGHT_HAND           0x59        // eyerok_right_hand_geo
 
 // group 6
 #define MODEL_DL_MONTY_MOLE_HOLE          0x54        // monty_mole_hole_seg5_dl_05000840
 #define MODEL_MONTY_MOLE                  0x55        // monty_mole_geo
-#define MODEL_UKIKI                       0x56        // ukiki_geo
 #define MODEL_FWOOSH                      0x57        // fwoosh_geo
 
 // group 7
@@ -372,11 +370,6 @@
 #define MODEL_MR_BLIZZARD_HIDDEN          0x55        // mr_blizzard_hidden_geo
 #define MODEL_MR_BLIZZARD                 0x56        // mr_blizzard_geo
 #define MODEL_PENGUIN                     0x57        // penguin_geo
-
-// group 8
-#define MODEL_CAP_SWITCH_EXCLAMATION      0x54        // cap_switch_exclamation_seg5_dl_05002E00
-#define MODEL_CAP_SWITCH                  0x55        // cap_switch_geo
-#define MODEL_CAP_SWITCH_BASE             0x56        // cap_switch_base_seg5_dl_05003120
 
 // group 9
 #define MODEL_BOO                         0x54        // boo_geo
@@ -462,13 +455,9 @@
 #define MODEL_CANNON_BASE                 0x80        // cannon_base_geo
 #define MODEL_BREAKABLE_BOX               0x81        // breakable_box_geo
 #define MODEL_BREAKABLE_BOX_SMALL         0x82        // breakable_box_small_geo
-#define MODEL_EXCLAMATION_BOX_OUTLINE     0x83        // exclamation_box_outline_geo
-#define MODEL_EXCLAMATION_POINT           0x84        // exclamation_point_seg8_dl_08025F08
 #define MODEL_MARIOS_WINGED_METAL_CAP     0x85        // marios_winged_metal_cap_geo
 #define MODEL_MARIOS_METAL_CAP            0x86        // marios_metal_cap_geo
 #define MODEL_MARIOS_WING_CAP             0x87        // marios_wing_cap_geo
-#define MODEL_MARIOS_CAP                  0x88        // marios_cap_geo
-#define MODEL_EXCLAMATION_BOX             0x89        // exclamation_box_geo
 #define MODEL_DIRT_ANIMATION              0x8A        // dirt_animation_geo
 #define MODEL_CARTOON_STAR                0x8B        // cartoon_star_geo
 #define MODEL_BLUE_COIN_SWITCH            0x8C        // blue_coin_switch_geo
@@ -539,7 +528,6 @@
 #define MODEL_BOWSER_KEY                  0xCC        // bowser_key_geo
 #define MODEL_EXPLOSION                   0xCD        // explosion_geo
 #define MODEL_SNUFIT                      0xCE        // snufit_geo
-#define MODEL_PURPLE_SWITCH               0xCF        // purple_switch_geo
 #define MODEL_CASTLE_STAR_DOOR_30_STARS   0xD0        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_50_STARS   0xD1        // castle_geo_000F00
 #define MODEL_CCM_SNOWMAN_BASE            0xD2        // ccm_geo_0003F0
@@ -558,18 +546,6 @@
 #define MODEL_CHUCKYA                     0xDF        // chuckya_geo
 #define MODEL_WHITE_PUFF                  0xE0        // white_puff_geo
 #define MODEL_TRAJECTORY_MARKER_BALL      0xE1        // bowling_ball_track_geo - duplicate used in SSL Pyramid small sized and as a track ball
-
-// Menu Models (overwrites Level Geometry IDs)
-#define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON         MODEL_LEVEL_GEOMETRY_03   // main_menu_geo_0001D0
-#define MODEL_MAIN_MENU_RED_ERASE_BUTTON          MODEL_LEVEL_GEOMETRY_04   // main_menu_geo_000290
-#define MODEL_MAIN_MENU_BLUE_COPY_BUTTON          MODEL_LEVEL_GEOMETRY_05   // main_menu_geo_0002B8
-#define MODEL_MAIN_MENU_YELLOW_FILE_BUTTON        MODEL_LEVEL_GEOMETRY_06   // main_menu_geo_0002E0
-#define MODEL_MAIN_MENU_GREEN_SCORE_BUTTON        MODEL_LEVEL_GEOMETRY_07   // main_menu_geo_000308
-#define MODEL_MAIN_MENU_MARIO_SAVE_BUTTON_FADE    MODEL_LEVEL_GEOMETRY_08   // main_menu_geo_000200
-#define MODEL_MAIN_MENU_MARIO_NEW_BUTTON          MODEL_LEVEL_GEOMETRY_09   // main_menu_geo_000230
-#define MODEL_MAIN_MENU_MARIO_NEW_BUTTON_FADE     MODEL_LEVEL_GEOMETRY_0A   // main_menu_geo_000260
-#define MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON       MODEL_LEVEL_GEOMETRY_0B   // main_menu_geo_000330
-#define MODEL_MAIN_MENU_GENERIC_BUTTON            MODEL_LEVEL_GEOMETRY_0C   // main_menu_geo_000358
 
 // level model aliases to level geometry IDs. Possibly a relic from an older level
 // format that used to rely on level geometry objects. (seen in WF, LLL, etc)

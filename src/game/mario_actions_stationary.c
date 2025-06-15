@@ -531,7 +531,7 @@ s32 act_crouching(struct MarioState *m) {
     }
 
     if (m->input & INPUT_A_PRESSED) {
-        return set_jumping_action(m, ACT_BACKFLIP, 0);
+        return set_jumping_action(m, ACT_JUMP, 0);
     }
 
     if (m->input & INPUT_OFF_FLOOR) {
@@ -552,10 +552,6 @@ s32 act_crouching(struct MarioState *m) {
 
     if (m->input & INPUT_NONZERO_ANALOG) {
         return set_mario_action(m, ACT_START_CRAWLING, 0);
-    }
-
-    if (m->input & INPUT_B_PRESSED) {
-        return set_mario_action(m, ACT_PUNCHING, 9);
     }
 
     stationary_ground_step(m);
@@ -687,7 +683,7 @@ s32 act_start_crouching(struct MarioState *m) {
     }
 
     if (m->input & INPUT_A_PRESSED) {
-        return set_jumping_action(m, ACT_BACKFLIP, 0);
+        return set_jumping_action(m, ACT_JUMP, 0);
     }
 
     if (m->input & INPUT_ABOVE_SLIDE) {
@@ -712,7 +708,7 @@ s32 act_stop_crouching(struct MarioState *m) {
     }
 
     if (m->input & INPUT_A_PRESSED) {
-        return set_jumping_action(m, ACT_BACKFLIP, 0);
+        return set_jumping_action(m, ACT_JUMP, 0);
     }
 
     if (m->input & INPUT_ABOVE_SLIDE) {
@@ -888,28 +884,6 @@ s32 act_freefall_land_stop(struct MarioState *m) {
     return FALSE;
 }
 
-s32 act_triple_jump_land_stop(struct MarioState *m) {
-    if (check_common_landing_cancels(m, ACT_JUMP)) {
-        return TRUE;
-    }
-
-    landing_step(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_IDLE);
-    return FALSE;
-}
-
-s32 act_backflip_land_stop(struct MarioState *m) {
-    if (!(m->input & INPUT_Z_DOWN) || m->marioObj->header.gfx.animInfo.animFrame >= 6) {
-        m->input &= ~INPUT_A_PRESSED;
-    }
-
-    if (check_common_landing_cancels(m, ACT_BACKFLIP)) {
-        return TRUE;
-    }
-
-    landing_step(m, MARIO_ANIM_TRIPLE_JUMP_LAND, ACT_IDLE);
-    return FALSE;
-}
-
 s32 act_lava_boost_land(struct MarioState *m) {
     m->input &= ~(INPUT_FIRST_PERSON | INPUT_B_PRESSED);
 
@@ -979,7 +953,7 @@ s32 act_air_throw_land(struct MarioState *m) {
     return FALSE;
 }
 
-s32 act_twirl_land(struct MarioState *m) {
+s32 act_triple_jump_land(struct MarioState *m) {
     m->actionState = 1;
     if (m->input & INPUT_STOMPED) {
         return set_mario_action(m, ACT_SHOCKWAVE_BOUNCE, 0);
@@ -1118,9 +1092,7 @@ s32 mario_execute_stationary_action(struct MarioState *m) {
         case ACT_HOLD_FREEFALL_LAND_STOP: cancel = act_hold_freefall_land_stop(m);          break;
         case ACT_AIR_THROW_LAND:          cancel = act_air_throw_land(m);                   break;
         case ACT_LAVA_BOOST_LAND:         cancel = act_lava_boost_land(m);                  break;
-        case ACT_TWIRL_LAND:              cancel = act_twirl_land(m);                       break;
-        case ACT_TRIPLE_JUMP_LAND_STOP:   cancel = act_triple_jump_land_stop(m);            break;
-        case ACT_BACKFLIP_LAND_STOP:      cancel = act_backflip_land_stop(m);               break;
+        case ACT_TRIPLE_JUMP_LAND:        cancel = act_triple_jump_land(m);                 break;
         case ACT_GROUND_POUND_LAND:       cancel = act_ground_pound_land(m);                break;
         case ACT_BRAKING_STOP:            cancel = act_braking_stop(m);                     break;
         case ACT_BUTT_SLIDE_STOP:         cancel = act_butt_slide_stop(m);                  break;

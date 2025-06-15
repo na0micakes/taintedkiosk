@@ -1153,8 +1153,6 @@ SECTIONS
     {
         BUILD_DIR/src/menu/title_screen.o(.text);
         BUILD_DIR/src/menu/intro_geo.o(.text);
-        BUILD_DIR/src/menu/file_select.o(.text);
-        BUILD_DIR/src/menu/star_select.o(.text);
         BUILD_DIR/src/menu*.o(.text);
         BUILD_DIR/libgoddard.a:gd_main.o(.text);
         BUILD_DIR/libgoddard.a:gd_memory.o(.text);
@@ -1176,10 +1174,6 @@ SECTIONS
         BUILD_DIR/src/menu/title_screen.o(.data*);
         BUILD_DIR/src/menu/title_screen.o(.rodata*);
         BUILD_DIR/src/menu/intro_geo.o(.data*);
-        BUILD_DIR/src/menu/file_select.o(.data*);
-        BUILD_DIR/src/menu/file_select.o(.rodata*);
-        BUILD_DIR/src/menu/star_select.o(.data*);
-        BUILD_DIR/src/menu/star_select.o(.rodata*);
         BUILD_DIR/src/menu*.o(.data*);
         BUILD_DIR/src/menu*.o(.rodata*);
         /* goddard subsystem data */
@@ -1212,8 +1206,6 @@ SECTIONS
     BEGIN_NOLOAD(goddard)
     {
         BUILD_DIR/src/menu/intro_geo.o(.bss*);
-        BUILD_DIR/src/menu/file_select.o(.bss*);
-        BUILD_DIR/src/menu/star_select.o(.bss*);
         BUILD_DIR/src/menu*.o(.bss*);
         BUILD_DIR/libgoddard.a:gd_main.o(.bss*);
         BUILD_DIR/libgoddard.a:gd_memory.o(.bss*);
@@ -1274,19 +1266,6 @@ SECTIONS
     END_SEG(gd_dynlists)
 
     gMainLevels = __romPos;
-
-    BEGIN_SEG(menu, 0x14000000)
-    {
-        BUILD_DIR/levels/menu/script.o(.data);
-        BUILD_DIR/levels/menu/geo.o(.data);
-    }
-    END_SEG(menu)
-    BEGIN_SEG(menu_segment_7, 0x07000000)
-    {
-        BUILD_DIR/levels/menu/leveldata.mio0.o(.data);
-        . = ALIGN(0x10);
-    }
-    END_SEG(menu_segment_7)
 
     BEGIN_SEG(scripts, 0x15000000)
     {

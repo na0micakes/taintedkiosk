@@ -452,11 +452,6 @@
 #define /*0x0FC*/ oElevatorUnkFC  OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oElevatorUnk100 OBJECT_FIELD_S32(0x1E)
 
-/* Exclamation Box */
-#define /*0x0F4*/ oExclamationBoxUnkF4 OBJECT_FIELD_F32(0x1B) // scale?
-#define /*0x0F8*/ oExclamationBoxUnkF8 OBJECT_FIELD_F32(0x1C) // scale?
-#define /*0x0FC*/ oExclamationBoxUnkFC OBJECT_FIELD_S32(0x1D) // angle?
-
 /* Eyerok Boss */
 #define /*0x0F8*/ oEyerokBossNumHands   OBJECT_FIELD_S32(0x1C)
 #define /*0x0FC*/ oEyerokBossUnkFC      OBJECT_FIELD_S32(0x1D)
@@ -593,20 +588,6 @@
 #define /*0x100*/ oKingBobombUnk100 OBJECT_FIELD_S32(0x1E)
 #define /*0x104*/ oKingBobombUnk104 OBJECT_FIELD_S32(0x1F)
 #define /*0x108*/ oKingBobombUnk108 OBJECT_FIELD_S32(0x20)
-
-/* Klepto */
-#define /*0x0F4*/ oKleptoDistanceToTarget      OBJECT_FIELD_F32(0x1B)
-#define /*0x0F8*/ oKleptoUnkF8                 OBJECT_FIELD_F32(0x1C)
-#define /*0x0FC*/ oKleptoUnkFC                 OBJECT_FIELD_F32(0x1D)
-#define /*0x100*/ oKleptoSpeed                 OBJECT_FIELD_F32(0x1E)
-#define /*0x104*/ oKleptoStartPosX             OBJECT_FIELD_F32(0x1F)
-#define /*0x108*/ oKleptoStartPosY             OBJECT_FIELD_F32(0x20)
-#define /*0x10C*/ oKleptoStartPosZ             OBJECT_FIELD_F32(0x21)
-#define /*0x110*/ oKleptoTimeUntilTargetChange OBJECT_FIELD_S32(0x22)
-#define /*0x1AC*/ oKleptoTargetNumber          OBJECT_FIELD_S16(0x49, 0)
-#define /*0x1AE*/ oKleptoUnk1AE                OBJECT_FIELD_S16(0x49, 1)
-#define /*0x1B0*/ oKleptoUnk1B0                OBJECT_FIELD_S16(0x4A, 0)
-#define /*0x1B2*/ oKleptoYawToTarget           OBJECT_FIELD_S16(0x4A, 1)
 
 /* Koopa */
 #define /*0x0F4*/ oKoopaAgility                     OBJECT_FIELD_F32(0x1B)
@@ -1044,19 +1025,6 @@
 /* Tweester */
 #define /*0x0F4*/ oTweesterScaleTimer OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oTweesterUnused     OBJECT_FIELD_S32(0x1C)
-
-/* Ukiki */
-#define /*0x0F4*/ oUkikiTauntCounter   OBJECT_FIELD_S16(0x1B, 0)
-#define /*0x0F6*/ oUkikiTauntsToBeDone OBJECT_FIELD_S16(0x1B, 1)
-// 0x1D-0x21 reserved for pathing
-#define /*0x110*/ oUkikiChaseFleeRange OBJECT_FIELD_F32(0x22)
-#define /*0x1AC*/ oUkikiTextState      OBJECT_FIELD_S16(0x49, 0)
-#define /*0x1AE*/ oUkikiTextboxTimer   OBJECT_FIELD_S16(0x49, 1)
-#define /*0x1B0*/ oUkikiCageSpinTimer  OBJECT_FIELD_S16(0x4A, 0)
-#define /*0x1B2*/ oUkikiHasCap         OBJECT_FIELD_S16(0x4A, 1)
-
-/* Ukiki Cage*/
-#define /*0x088*/ oUkikiCageNextAction OBJECT_FIELD_S32(0x00)
 
 /* Unagi */
 #define /*0x0F4*/ oUnagiUnkF4  OBJECT_FIELD_F32(0x1B)

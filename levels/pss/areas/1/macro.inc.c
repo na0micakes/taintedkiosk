@@ -40,6 +40,5 @@ const MacroObject pss_seg7_macro_objs[] = {
     MACRO_OBJECT               (/*preset*/ macro_hidden_blue_coin,     /*yaw*/   0, /*pos*/ -4445,  4490, -5536),
     MACRO_OBJECT               (/*preset*/ macro_hidden_blue_coin,     /*yaw*/   0, /*pos*/ -6263,  4150, -4009),
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_2,        /*yaw*/   0, /*pos*/  1854, -2132, -4290),
-    MACRO_OBJECT               (/*preset*/ macro_box_star_act_1,       /*yaw*/   0, /*pos*/ -6385, -4200,  5770),
     MACRO_OBJECT_END(),
 };

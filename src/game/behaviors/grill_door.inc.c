@@ -46,27 +46,6 @@ void bhv_openable_grill_loop(void) {
             break;
 
         case 1:
-            if ((o->oOpenableGrillPurpleSwitch =
-                 cur_obj_nearest_object_with_behavior(bhvFloorSwitchGrills)) != NULL) {
-                o->oAction++;
-            }
-            break;
-
-        case 2:
-            obj = o->oOpenableGrillPurpleSwitch;
-
-            if (obj->oAction == PURPLE_SWITCH_ACT_TICKING) {
-                o->oOpenableGrillUnk88 = 2;
-                cur_obj_play_sound_2(SOUND_GENERAL_CAGE_OPEN);
-                o->oAction++;
-
-                if (o->oBhvParams2ndByte != OPENABLE_GRILL_BP_BOB) {
-                    play_puzzle_jingle();
-                }
-            }
-            break;
-
-        case 3:
             break;
     }
 }

@@ -1,6 +1,5 @@
 // 0x0700F438 - 0x0700F688
 const MacroObject bitdw_seg7_macro_objs[] = {
-    MACRO_OBJECT               (/*preset*/ macro_box_metal_cap,               /*yaw*/   0, /*pos*/ -6420, -2900,  3880),
     MACRO_OBJECT               (/*preset*/ macro_coin_ring_horizontal_flying, /*yaw*/   0, /*pos*/ -1660, -3000,  3900),
     MACRO_OBJECT               (/*preset*/ macro_coin_line_horizontal,        /*yaw*/   0, /*pos*/ -2400,  -800,  1900),
     MACRO_OBJECT_WITH_BHV_PARAM(/*preset*/ macro_circling_amp,                /*yaw*/   0, /*pos*/ -5300,    20,  1000, /*bhvParam*/ AMP_BP_ROT_RADIUS_200),
@@ -26,9 +25,7 @@ const MacroObject bitdw_seg7_macro_objs[] = {
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/ -4060,  1011,   240),
     MACRO_OBJECT_WITH_BHV_PARAM(/*preset*/ macro_circling_amp,                /*yaw*/   0, /*pos*/ -4620,  1220,  -300, /*bhvParam*/ AMP_BP_ROT_RADIUS_400),
     MACRO_OBJECT               (/*preset*/ macro_coin_ring_horizontal,        /*yaw*/   0, /*pos*/ -4620,  1220,  -300),
-    MACRO_OBJECT               (/*preset*/ macro_box_1up,                     /*yaw*/   0, /*pos*/ -4860,  1380,  -300),
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/  -150, -1200,  3660),
-    MACRO_OBJECT               (/*preset*/ macro_box_three_coins,             /*yaw*/   0, /*pos*/ -5120,  1460, -2140),
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/  4380,  2120,     0),
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/  5420,  3000,     0),
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/ -2357,  1200, -2454),
@@ -53,11 +50,9 @@ const MacroObject bitdw_seg7_macro_objs[] = {
     MACRO_OBJECT               (/*preset*/ macro_1up,                         /*yaw*/   0, /*pos*/   610,  1045,  -167),
     MACRO_OBJECT               (/*preset*/ macro_1up_beat_bitdw_bowser,       /*yaw*/   0, /*pos*/  -485,  1054,  -167),
     MACRO_OBJECT               (/*preset*/ macro_1up_beat_bitfs_bowser,       /*yaw*/   0, /*pos*/  1100,  2080,   363),
-    MACRO_OBJECT               (/*preset*/ macro_floor_switch_hidden_objects, /*yaw*/   0, /*pos*/ -3100, -2946,  3530),
     MACRO_OBJECT               (/*preset*/ macro_hidden_breakable_box,        /*yaw*/   0, /*pos*/ -7810, -3360,  4500),
     MACRO_OBJECT               (/*preset*/ macro_hidden_breakable_box,        /*yaw*/   0, /*pos*/ -7810, -3360,  4700),
     MACRO_OBJECT               (/*preset*/ macro_hidden_breakable_box,        /*yaw*/   0, /*pos*/ -7810, -3360,  4900),
     MACRO_OBJECT               (/*preset*/ macro_hidden_breakable_box,        /*yaw*/   0, /*pos*/ -3100, -3145,  4518),
-    MACRO_OBJECT               (/*preset*/ macro_box_1up_running_away,        /*yaw*/   0, /*pos*/ -2420, -1140,  3700),
     MACRO_OBJECT_END(),
 };

@@ -17,7 +17,6 @@
 #include "levels/cotmc/header.h"
 
 static const LevelScript script_func_local_1[] = {
-    OBJECT(/*model*/ MODEL_CAP_SWITCH, /*pos*/ 0,  363, -6144, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(0x01), /*bhv*/ bhvCapSwitch),
     OBJECT(/*model*/ MODEL_NONE,       /*pos*/ 0,  500, -7373, /*angle*/ 0, 0, 0, /*bhvParam*/ 0, /*bhv*/ bhvWaterfallSoundLoop),
     OBJECT(/*model*/ MODEL_NONE,       /*pos*/ 0,  500,  3584, /*angle*/ 0, 0, 0, /*bhvParam*/ 0, /*bhv*/ bhvWaterfallSoundLoop),
     RETURN(),
@@ -40,7 +39,6 @@ const LevelScript level_cotmc_entry[] = {
     LOAD_RAW         (/*seg*/ 0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
     MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
-    JUMP_LINK(script_func_global_9),
     JUMP_LINK(script_func_global_18),
     JUMP_LINK(script_func_global_1),
 

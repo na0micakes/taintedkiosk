@@ -8,9 +8,6 @@
 #include "types.h"
 #include "make_const_nonconst.h"
 
-#include "klepto/model.inc.c"
-#include "klepto/anims/data.inc.c"
-#include "klepto/anims/table.inc.c"
 UNUSED static const u64 binid_0 = 0;
 
 #include "eyerok/model.inc.c"

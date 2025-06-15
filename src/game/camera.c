@@ -10589,12 +10589,6 @@ struct Cutscene sCutsceneKeyDance[] = {
     { cutscene_key_dance, CUTSCENE_LOOP }
 };
 
-/**
- * Cutscene that plays when Mario presses a cap switch.
- */
-struct Cutscene sCutsceneCapSwitchPress[] = {
-    { cutscene_cap_switch_press, CUTSCENE_LOOP }
-};
 
 /**
  * Cutscene that plays when Mario opens a sliding star door.
@@ -11106,7 +11100,6 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_0F_UNUSED, sCutsceneUnused)
         CUTSCENE(CUTSCENE_END_WAVING, sCutsceneEndWaving)
         CUTSCENE(CUTSCENE_CREDITS, sCutsceneCredits)
-        CUTSCENE(CUTSCENE_CAP_SWITCH_PRESS, sCutsceneCapSwitchPress)
         CUTSCENE(CUTSCENE_SLIDING_DOORS_OPEN, sCutsceneSlidingDoorsOpen)
         CUTSCENE(CUTSCENE_PREPARE_CANNON, sCutscenePrepareCannon)
         CUTSCENE(CUTSCENE_UNLOCK_KEY_DOOR, sCutsceneUnlockKeyDoor)

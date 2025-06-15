@@ -787,82 +787,6 @@
     #define MONTY_MOLE_ROCK_ACT_HELD 0
     #define MONTY_MOLE_ROCK_ACT_MOVE 1
 
-/* Ukiki */
-    /* oAction */
-    #define UKIKI_ACT_IDLE            0
-    #define UKIKI_ACT_RUN             1
-    #define UKIKI_ACT_TURN_TO_MARIO   2
-    #define UKIKI_ACT_JUMP            3
-    #define UKIKI_ACT_GO_TO_CAGE      4
-    #define UKIKI_ACT_WAIT_TO_RESPAWN 5
-    #define UKIKI_ACT_UNUSED_TURN     6
-    #define UKIKI_ACT_RETURN_HOME     7
-
-    /* oSubAction */
-    #define UKIKI_SUB_ACT_TAUNT_NONE       0
-    #define UKIKI_SUB_ACT_TAUNT_ITCH       1
-    #define UKIKI_SUB_ACT_TAUNT_SCREECH    2
-    #define UKIKI_SUB_ACT_TAUNT_JUMP_CLAP  3
-    #define UKIKI_SUB_ACT_TAUNT_HANDSTAND  4
-
-    #define UKIKI_SUB_ACT_CAGE_RUN_TO_CAGE    0
-    #define UKIKI_SUB_ACT_CAGE_WAIT_FOR_MARIO 1
-    #define UKIKI_SUB_ACT_CAGE_TALK_TO_MARIO  2
-    #define UKIKI_SUB_ACT_CAGE_TURN_TO_CAGE   3
-    #define UKIKI_SUB_ACT_CAGE_JUMP_TO_CAGE   4
-    #define UKIKI_SUB_ACT_CAGE_LAND_ON_CAGE   5
-    #define UKIKI_SUB_ACT_CAGE_SPIN_ON_CAGE   6
-    #define UKIKI_SUB_ACT_CAGE_DESPAWN        7
-
-    /* oUkikiTextState */
-    #define UKIKI_TEXT_DEFAULT       0
-    #define UKIKI_TEXT_CAGE_TEXTBOX  1
-    #define UKIKI_TEXT_GO_TO_CAGE    2
-    #define UKIKI_TEXT_STOLE_CAP     3
-    #define UKIKI_TEXT_HAS_CAP       4
-    #define UKIKI_TEXT_GAVE_CAP_BACK 5
-    #define UKIKI_TEXT_DO_NOT_LET_GO 6
-    #define UKIKI_TEXT_STEAL_CAP     7
-
-    /* oBhvParams2ndByte */
-    #define UKIKI_BP_CAGE 0
-    #define UKIKI_BP_CAP  1
-
-    /* Animations */
-    #define UKIKI_ANIM_RUN          0
-    #define UKIKI_ANIM_UNUSED_WALK  1
-    #define UKIKI_ANIM_UNUSED_APOSE 2
-    #define UKIKI_ANIM_UNUSED_DEATH 3
-    #define UKIKI_ANIM_SCREECH      4
-    #define UKIKI_ANIM_JUMP_CLAP    5
-    #define UKIKI_ANIM_UNUSED_HOP   6
-    #define UKIKI_ANIM_LAND         7
-    #define UKIKI_ANIM_JUMP         8
-    #define UKIKI_ANIM_ITCH         9
-    #define UKIKI_ANIM_HANDSTAND    10
-    #define UKIKI_ANIM_TURN         11
-    #define UKIKI_ANIM_HELD         12
-
-    /* oAnimState */
-    #define UKIKI_ANIM_STATE_DEFAULT    0
-    #define UKIKI_ANIM_STATE_EYE_CLOSED 1
-    #define UKIKI_ANIM_STATE_CAP_ON     2
-
-    /* oUkikiHasCap */
-    #define UKIKI_CAP_ON 1
-
-/* Ukiki Cage Star */
-    /* oAction */
-    #define UKIKI_CAGE_STAR_ACT_IN_CAGE    0
-    #define UKIKI_CAGE_STAR_ACT_SPAWN_STAR 1
-
-/* Ukiki Cage */
-    /* oAction */
-    #define UKIKI_CAGE_ACT_WAIT_FOR_UKIKI 0
-    #define UKIKI_CAGE_ACT_SPIN           1
-    #define UKIKI_CAGE_ACT_FALL           2
-    #define UKIKI_CAGE_ACT_HIDE           3
-
 /* Piranha Plant */
     /* oAction */
     #define PIRANHA_PLANT_ACT_IDLE            0
@@ -904,14 +828,6 @@
     #define PLATFORM_ON_TRACK_TYPE_SKI_LIFT  1
     #define PLATFORM_ON_TRACK_TYPE_CHECKERED 2
     #define PLATFORM_ON_TRACK_TYPE_GRATE     3
-
-/* Purple Switch */
-    /* oAction */
-    #define PURPLE_SWITCH_ACT_IDLE                      0
-    #define PURPLE_SWITCH_ACT_PRESSED                   1
-    #define PURPLE_SWITCH_ACT_TICKING                   2
-    #define PURPLE_SWITCH_ACT_UNPRESSED                 3
-    #define PURPLE_SWITCH_ACT_WAIT_FOR_MARIO_TO_GET_OFF 4
 
 /* Pyramid Elevator */
     /* oAction */
@@ -1072,22 +988,6 @@
     #define EYEROK_HAND_ACT_BECOME_ACTIVE      14
     #define EYEROK_HAND_ACT_DIE                15
 
-/* Klepto */
-    /* oAction */
-    #define KLEPTO_ACT_CIRCLE_TARGET_HOLDING   0
-    #define KLEPTO_ACT_APPROACH_TARGET_HOLDING 1
-    #define KLEPTO_ACT_WAIT_FOR_MARIO          2
-    #define KLEPTO_ACT_TURN_TOWARD_MARIO       3
-    #define KLEPTO_ACT_DIVE_AT_MARIO           4
-    #define KLEPTO_ACT_RESET_POSITION          5
-    #define KLEPTO_ACT_STRUCK_BY_MARIO         6
-    #define KLEPTO_ACT_RETREAT                 7
-
-    /* oAnimState */
-    #define KLEPTO_ANIM_STATE_HOLDING_NOTHING 0
-    #define KLEPTO_ANIM_STATE_HOLDING_CAP     1
-    #define KLEPTO_ANIM_STATE_HOLDING_STAR    2
-
 /* Bird */
     /* oAction */
     #define BIRD_ACT_INACTIVE 0
@@ -1225,39 +1125,6 @@
     #define HIDDEN_OBJECT_BP_WDW_PLATFORM             1
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_1 1
     #define HIDDEN_OBJECT_BP_UNBREAKABLE_BOX_UNUSED_2 2
-
-/* Exclamation Box */
-    /* oAnimState */
-    #define EXCLAMATION_BOX_ANIM_STATE_WING_CAP   0
-    #define EXCLAMATION_BOX_ANIM_STATE_METAL_CAP  1
-    #define EXCLAMATION_BOX_ANIM_STATE_VANISH_CAP 2
-    #define EXCLAMATION_BOX_ANIM_STATE_DEFAULT    3
-
-    /* oBhvParams2ndByte */
-    #define EXCLAMATION_BOX_BP_WING_CAP         0
-    #define EXCLAMATION_BOX_BP_METAL_CAP        1
-    #define EXCLAMATION_BOX_BP_VANISH_CAP       2
-    #define EXCLAMATION_BOX_BP_SPECIAL_CAP_END  2
-    #define EXCLAMATION_BOX_BP_KOOPA_SHELL      3
-    #define EXCLAMATION_BOX_BP_ONE_COIN         4
-    #define EXCLAMATION_BOX_BP_THREE_COINS      5
-    #define EXCLAMATION_BOX_BP_TEN_COINS        6
-    #define EXCLAMATION_BOX_BP_1UP_WALKING      7
-    #define EXCLAMATION_BOX_BP_STAR_ACT_1       8
-    #define EXCLAMATION_BOX_BP_1UP_RUNNING_AWAY 9
-    #define EXCLAMATION_BOX_BP_STAR_ACT_2       10
-    #define EXCLAMATION_BOX_BP_STAR_ACT_3       11
-    #define EXCLAMATION_BOX_BP_STAR_ACT_4       12
-    #define EXCLAMATION_BOX_BP_STAR_ACT_5       13
-    #define EXCLAMATION_BOX_BP_STAR_ACT_6       14
-    #define EXCLAMATION_BOX_BP_END              99
-
-/* Cap Switch */
-    /* oBhvParams2ndByte */
-    #define CAP_SWITCH_BP_RED    0
-    #define CAP_SWITCH_BP_GREEN  1
-    #define CAP_SWITCH_BP_BLUE   2
-    #define CAP_SWITCH_BP_YELLOW 3
 
 /* Openable Grill */
     /* oBhvParams2ndByte */

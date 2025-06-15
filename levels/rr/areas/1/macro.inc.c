@@ -10,7 +10,6 @@ const MacroObject rr_seg7_macro_objs[] = {
     MACRO_OBJECT               (/*preset*/ macro_red_coin,                    /*yaw*/   0, /*pos*/ -5800,  -400,   -50),
     MACRO_OBJECT               (/*preset*/ macro_bobomb_buddy_opens_cannon_1, /*yaw*/   0, /*pos*/ -4200,  1648,     0),
     MACRO_OBJECT_WITH_BHV_PARAM(/*preset*/ macro_cannon_closed,               /*yaw*/   0, /*pos*/  5545,  3333, -2345, /*bhvParam*/ 0xC0),
-    MACRO_OBJECT               (/*preset*/ macro_box_1up,                     /*yaw*/   0, /*pos*/ -6750,  2600,   -50),
     MACRO_OBJECT_WITH_BHV_PARAM(/*preset*/ macro_circling_amp,                /*yaw*/   0, /*pos*/  6500,  -900,   900, /*bhvParam*/ AMP_BP_ROT_RADIUS_300),
     MACRO_OBJECT               (/*preset*/ macro_coin_ring_horizontal,        /*yaw*/   0, /*pos*/  6500, -1000,   900),
     MACRO_OBJECT               (/*preset*/ macro_enemy_lakitu,                /*yaw*/   0, /*pos*/   615,  -584,     0),
@@ -57,9 +56,6 @@ const MacroObject rr_seg7_macro_objs[] = {
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/ -7338, -2260,  6350),
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/ -6715, -1900,  6700),
     MACRO_OBJECT               (/*preset*/ macro_yellow_coin_1,               /*yaw*/   0, /*pos*/ -6715, -1900,  6350),
-    MACRO_OBJECT               (/*preset*/ macro_box_1up_running_away,        /*yaw*/   0, /*pos*/ -4844, -4240,  6622),
-    MACRO_OBJECT               (/*preset*/ macro_box_1up_running_away,        /*yaw*/   0, /*pos*/ -3428,  6770, -5128),
-    MACRO_OBJECT               (/*preset*/ macro_box_star_act_6,              /*yaw*/   0, /*pos*/  5000,  4100,  4440),
     MACRO_OBJECT               (/*preset*/ macro_fire_spitter,                /*yaw*/   0, /*pos*/ -6000,  -440,   -40),
     MACRO_OBJECT_END(),
 };

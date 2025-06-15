@@ -5,8 +5,6 @@ const MacroObject sl_seg7_area_2_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,               /*yaw*/   0, /*pos*/  1140,     0,   900),
     MACRO_OBJECT(/*preset*/ macro_goomba,                      /*yaw*/   0, /*pos*/  1760,     0,   200),
     MACRO_OBJECT(/*preset*/ macro_spindrift,                   /*yaw*/   0, /*pos*/  1600,    80,  -800),
-    MACRO_OBJECT(/*preset*/ macro_box_vanish_cap,              /*yaw*/   0, /*pos*/  1660,   300, -1720),
-    MACRO_OBJECT(/*preset*/ macro_box_three_coins,             /*yaw*/   0, /*pos*/  -720,   300, -1740),
     MACRO_OBJECT(/*preset*/ macro_bobomb_buddy_opens_cannon_1, /*yaw*/   0, /*pos*/ -1400,     0, -1740),
     MACRO_OBJECT(/*preset*/ macro_goomba,                      /*yaw*/   0, /*pos*/   -20,     0,   960),
     MACRO_OBJECT(/*preset*/ macro_goomba,                      /*yaw*/   0, /*pos*/   320,     0, -1220),
@@ -17,6 +15,5 @@ const MacroObject sl_seg7_area_2_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal_flying, /*yaw*/  90, /*pos*/  1500,   200,   500),
     MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal_flying, /*yaw*/  90, /*pos*/  1500,   300,   500),
     MACRO_OBJECT(/*preset*/ macro_1up,                         /*yaw*/   0, /*pos*/  1700,    20,  -100),
-    MACRO_OBJECT(/*preset*/ macro_box_1up_running_away,        /*yaw*/   0, /*pos*/  -120,   300, -1740),
     MACRO_OBJECT_END(),
 };

@@ -244,37 +244,6 @@ s32 get_star_collection_dialog(struct MarioState *m) {
     return dialogID;
 }
 
-// save menu handler
-void handle_save_menu(struct MarioState *m) {
-    s32 dialogID;
-    // wait for the menu to show up
-    if (is_anim_past_end(m) && gSaveOptSelectIndex != MENU_OPT_NONE) {
-        // save and continue / save and quit
-        if (gSaveOptSelectIndex == MENU_OPT_SAVE_AND_CONTINUE || gSaveOptSelectIndex == MENU_OPT_SAVE_AND_QUIT) {
-            save_file_do_save(gCurrSaveFileNum - 1);
-
-            if (gSaveOptSelectIndex == MENU_OPT_SAVE_AND_QUIT) {
-                fade_into_special_warp(-2, 0); // reset game
-            }
-        }
-
-        // not quitting
-        if (gSaveOptSelectIndex != MENU_OPT_SAVE_AND_QUIT) {
-            disable_time_stop();
-            m->faceAngle[1] += 0x8000;
-            // figure out what dialog to show, if we should
-            dialogID = get_star_collection_dialog(m);
-            if (dialogID) {
-                play_peachs_jingle();
-                // look up for dialog
-                set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
-            } else {
-                set_mario_action(m, ACT_IDLE, 0);
-            }
-        }
-    }
-}
-
 /**
  * spawn_obj_at_mario_rel_yaw: Spawns object at Mario with relative yaw.
  * Spawns object with given behavior and model and copies over Mario's position
@@ -483,8 +452,7 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
                 set_mario_action(m, ACT_WATER_IDLE, 0); // 100c star?
             } else {
                 // make Mario walk into door after star dialog
-                set_mario_action(m, m->prevAction == ACT_UNLOCKING_STAR_DOOR ? ACT_WALKING : ACT_IDLE,
-                                 0);
+                set_mario_action(m, m->prevAction == ACT_WALKING, 0);
             }
         }
     }
@@ -736,7 +704,7 @@ s32 act_quicksand_death(struct MarioState *m) {
     }
     if (m->actionState == 1) {
         if (m->quicksandDepth >= 100.0f) {
-            play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
+            play_sound_if_no_flag(m, SOUND_MARIO_ON_FIRE, MARIO_ACTION_SOUND_PLAYED);
         }
         if ((m->quicksandDepth += 5.0f) >= 180.0f) {
             level_trigger_warp(m, WARP_OP_DEATH);
@@ -811,47 +779,6 @@ s32 act_unlocking_key_door(struct MarioState *m) {
     }
 
     m->actionTimer++;
-    return FALSE;
-}
-
-s32 act_unlocking_star_door(struct MarioState *m) {
-    switch (m->actionState) {
-        case 0:
-            m->faceAngle[1] = m->usedObj->oMoveAngleYaw;
-            if (m->actionArg & 2) {
-                m->faceAngle[1] += 0x8000;
-            }
-            m->marioObj->oMarioReadingSignDPosX = m->pos[0];
-            m->marioObj->oMarioReadingSignDPosZ = m->pos[2];
-            set_mario_animation(m, MARIO_ANIM_SUMMON_STAR);
-            m->actionState++;
-            break;
-        case 1:
-            if (is_anim_at_end(m)) {
-                spawn_object(m->marioObj, MODEL_STAR, bhvUnlockDoorStar);
-                m->actionState++;
-            }
-            break;
-        case 2:
-            if (m->actionTimer++ == 70) {
-                set_mario_animation(m, MARIO_ANIM_RETURN_STAR_APPROACH_DOOR);
-                m->actionState++;
-            }
-            break;
-        case 3:
-            if (is_anim_at_end(m)) {
-                save_file_set_flags(get_door_save_file_flag(m->usedObj));
-                set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_038);
-            }
-            break;
-    }
-
-    m->pos[0] = m->marioObj->oMarioReadingSignDPosX;
-    m->pos[2] = m->marioObj->oMarioReadingSignDPosZ;
-
-    update_mario_pos_for_anim(m);
-    stop_and_set_height_to_floor(m);
-
     return FALSE;
 }
 
@@ -1024,6 +951,8 @@ s32 act_spawn_spin_airborne(struct MarioState *m) {
         set_mario_animation(m, MARIO_ANIM_GENERAL_FALL);
     }
 
+    spawn_object(m->marioObj, MODEL_SPARKLES, bhvSparkleSpawn);
+    m->particleFlags |= PARTICLE_SPARKLES;
     return FALSE;
 }
 
@@ -1055,7 +984,6 @@ s32 act_exit_airborne(struct MarioState *m) {
     }
     // rotate him to face away from the entrance
     m->marioObj->header.gfx.angle[1] += 0x8000;
-    m->particleFlags |= PARTICLE_SPARKLES;
     return FALSE;
 }
 
@@ -1066,90 +994,17 @@ s32 act_falling_exit_airborne(struct MarioState *m) {
     }
     // rotate Mario to face away from the entrance
     m->marioObj->header.gfx.angle[1] += 0x8000;
-    m->particleFlags |= PARTICLE_SPARKLES;
     return FALSE;
 }
 
 s32 act_exit_land_save_dialog(struct MarioState *m) {
-    s32 animFrame;
     stationary_ground_step(m);
     play_mario_landing_sound_once(m, SOUND_ACTION_TERRAIN_LANDING);
-    switch (m->actionState) {
-        // determine type of exit
-        case 0:
-            set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_GENERAL_LAND
-                                                     : MARIO_ANIM_LAND_FROM_SINGLE_JUMP);
-            if (is_anim_past_end(m)) {
-                if (gLastCompletedCourseNum != COURSE_BITDW
-                    && gLastCompletedCourseNum != COURSE_BITFS) {
-                    enable_time_stop();
-                }
+    set_mario_animation(m, MARIO_ANIM_GENERAL_LAND);
 
-                set_menu_mode(MENU_MODE_RENDER_COURSE_COMPLETE_SCREEN);
-                gSaveOptSelectIndex = MENU_OPT_NONE;
-
-                m->actionState = 3; // star exit with cap
-                if (!(m->flags & MARIO_CAP_ON_HEAD)) {
-                    m->actionState = 2; // star exit without cap
-                }
-                if (gLastCompletedCourseNum == COURSE_BITDW
-                    || gLastCompletedCourseNum == COURSE_BITFS) {
-                    m->actionState = 1; // key exit
-                }
-            }
-            break;
-        // key exit
-        case 1:
-            animFrame = set_mario_animation(m, MARIO_ANIM_THROW_CATCH_KEY);
-            switch (animFrame) {
-                case -1:
-                    spawn_obj_at_mario_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyCourseExit, -32768);
-                    //! fallthrough
-                case 67:
-                    play_sound(SOUND_ACTION_KEY_SWISH, m->marioObj->header.gfx.cameraToObject);
-                    //! fallthrough
-                case 83:
-                    play_sound(SOUND_ACTION_PAT_BACK, m->marioObj->header.gfx.cameraToObject);
-                    //! fallthrough
-                case 111:
-                    play_sound(SOUND_ACTION_UNKNOWN45C, m->marioObj->header.gfx.cameraToObject);
-                    // no break
-            }
-            handle_save_menu(m);
-            break;
-        // exit without cap
-        case 2:
-            animFrame = set_mario_animation(m, MARIO_ANIM_MISSING_CAP);
-            if ((animFrame >= 18 && animFrame < 55) || (animFrame >= 112 && animFrame < 134)) {
-                m->marioBodyState->handState = MARIO_HAND_OPEN;
-            }
-            if (!(animFrame < 109) && animFrame < 154) {
-                m->marioBodyState->eyeState = MARIO_EYES_HALF_CLOSED;
-            }
-
-            handle_save_menu(m);
-            break;
-        // exit with cap
-        case 3:
-            animFrame = set_mario_animation(m, MARIO_ANIM_TAKE_CAP_OFF_THEN_ON);
-            switch (animFrame) {
-                case 12:
-                    cutscene_take_cap_off(m);
-                    break;
-                case 37:
-                // fallthrough
-                case 53:
-                    play_sound(SOUND_ACTION_BRUSH_HAIR, m->marioObj->header.gfx.cameraToObject);
-                    break;
-                case 82:
-                    cutscene_put_cap_on(m);
-                    break;
-            }
-            handle_save_menu(m);
-            break;
+    if (is_anim_past_end(m)) {
+        set_mario_action(m, ACT_IDLE, 0);
     }
-
-    m->marioObj->header.gfx.angle[1] += 0x8000;
     return FALSE;
 }
 
@@ -1455,7 +1310,7 @@ s32 act_teleport_fade_in(struct MarioState *m) {
 }
 
 s32 act_shocked(struct MarioState *m) {
-    play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
+    play_sound_if_no_flag(m, SOUND_MARIO_ON_FIRE, MARIO_ACTION_SOUND_PLAYED);
     play_sound(SOUND_MOVING_SHOCKED, m->marioObj->header.gfx.cameraToObject);
     set_camera_shake_from_hit(SHAKE_SHOCK);
 
@@ -1870,7 +1725,6 @@ static s32 jumbo_star_cutscene_taking_off(struct MarioState *m) {
                 play_sound(SOUND_MARIO_YAHOO, m->marioObj->header.gfx.cameraToObject);
                 break;
         }
-        m->particleFlags |= PARTICLE_SPARKLES;
 
         if (is_anim_past_end(m)) {
             advance_cutscene_step(m);
@@ -1929,7 +1783,6 @@ static s32 jumbo_star_cutscene_flying(struct MarioState *m) {
 
     m->marioBodyState->handState = MARIO_HAND_RIGHT_OPEN;
     vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
-    m->particleFlags |= PARTICLE_SPARKLES;
 
     if (m->actionTimer++ == 500) {
         level_trigger_warp(m, WARP_OP_CREDITS_START);
@@ -2729,7 +2582,6 @@ s32 mario_execute_cutscene_action(struct MarioState *m) {
         case ACT_SPECIAL_DEATH_EXIT:         cancel = act_special_death_exit(m);         break;
         case ACT_FALLING_EXIT_AIRBORNE:      cancel = act_falling_exit_airborne(m);      break;
         case ACT_UNLOCKING_KEY_DOOR:         cancel = act_unlocking_key_door(m);         break;
-        case ACT_UNLOCKING_STAR_DOOR:        cancel = act_unlocking_star_door(m);        break;
         case ACT_ENTERING_STAR_DOOR:         cancel = act_entering_star_door(m);         break;
         case ACT_SPAWN_NO_SPIN_AIRBORNE:     cancel = act_spawn_no_spin_airborne(m);     break;
         case ACT_SPAWN_NO_SPIN_LANDING:      cancel = act_spawn_no_spin_landing(m);      break;

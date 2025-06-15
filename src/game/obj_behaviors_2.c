@@ -729,11 +729,7 @@ static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioActi
                 case ATTACK_HANDLER_SPECIAL_KOOPA_LOSE_SHELL:
                     shelled_koopa_attack_handler(attackType);
                     break;
-
-                case ATTACK_HANDLER_SET_SPEED_TO_ZERO:
-                    obj_set_speed_to_zero();
-                    break;
-
+                    
                 case ATTACK_HANDLER_SPECIAL_WIGGLER_JUMPED_ON:
                     wiggler_jumped_on_attack_handler();
                     break;
@@ -922,7 +918,6 @@ static void treat_far_home_as_mario(f32 threshold) {
 #include "behaviors/mr_blizzard.inc.c"
 #include "behaviors/sliding_platform_2.inc.c"
 #include "behaviors/rotating_octagonal_plat.inc.c"
-#include "behaviors/animated_floor_switch.inc.c"
 #include "behaviors/activated_bf_plat.inc.c"
 #include "behaviors/recovery_heart.inc.c"
 #include "behaviors/water_bomb_cannon.inc.c"
@@ -954,7 +949,6 @@ void obj_spit_fire(s16 relativePosX, s16 relativePosY, s16 relativePosZ, f32 sca
 #include "behaviors/snufit.inc.c"
 #include "behaviors/horizontal_grindel.inc.c"
 #include "behaviors/eyerok.inc.c"
-#include "behaviors/klepto.inc.c"
 #include "behaviors/bird.inc.c"
 #include "behaviors/racing_penguin.inc.c"
 #include "behaviors/coffin.inc.c"

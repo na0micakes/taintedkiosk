@@ -44,17 +44,6 @@ void hidden_breakable_box_actions(void) {
         if (o->oTimer == 0) {
             breakable_box_init();
         }
-        if (o->oHiddenObjectPurpleSwitch == NULL) {
-            o->oHiddenObjectPurpleSwitch =
-                cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
-        }
-        if ((purpleSwitch = o->oHiddenObjectPurpleSwitch) != NULL) {
-            if (purpleSwitch->oAction == PURPLE_SWITCH_ACT_TICKING) {
-                o->oAction++;
-                cur_obj_enable_rendering();
-                cur_obj_unhide();
-            }
-        }
     } else if (o->oAction == HIDDEN_OBJECT_ACT_ACTIVE) {
         cur_obj_become_tangible();
         if (cur_obj_wait_then_blink(360, 20)) {
@@ -71,11 +60,6 @@ void hidden_breakable_box_actions(void) {
         cur_obj_become_intangible();
         cur_obj_disable_rendering();
         o->oInteractStatus = 0;
-        if ((purpleSwitch = o->oHiddenObjectPurpleSwitch) != NULL) {
-            if (purpleSwitch->oAction == PURPLE_SWITCH_ACT_IDLE) {
-                o->oAction = HIDDEN_OBJECT_ACT_INACTIVE;
-            }
-        }
     }
 }
 
@@ -87,17 +71,6 @@ void hidden_wdw_platform_actions(void) {
     if (o->oAction == HIDDEN_OBJECT_ACT_INACTIVE) {
         cur_obj_disable_rendering();
         cur_obj_become_intangible();
-        if (o->oHiddenObjectPurpleSwitch == NULL) {
-            o->oHiddenObjectPurpleSwitch =
-                cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
-        }
-        if ((purpleSwitch = o->oHiddenObjectPurpleSwitch) != NULL) {
-            if (purpleSwitch->oAction == PURPLE_SWITCH_ACT_TICKING) {
-                o->oAction++;
-                cur_obj_enable_rendering();
-                cur_obj_unhide();
-            }
-        }
     } else { // HIDDEN_OBJECT_ACT_ACTIVE
         cur_obj_become_tangible();
         if (cur_obj_wait_then_blink(360, 20)) {

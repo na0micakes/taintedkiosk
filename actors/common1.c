@@ -52,7 +52,6 @@ UNUSED static const u64 binid_10 = 10;
 #include "warp_collision/collision.inc.c"
 UNUSED static const u64 binid_11 = 11;
 
-#include "mario_cap/model.inc.c"
 UNUSED static const u64 binid_12 = 12;
 
 #include "power_meter/model.inc.c"

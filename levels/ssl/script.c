@@ -27,8 +27,6 @@ static const LevelScript script_func_local_2[] = {
     OBJECT          (/*model*/ MODEL_TWEESTER,        /*pos*/ -3600, -200,  2940, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(0x12), /*bhv*/ bhvTweester),
     OBJECT_WITH_ACTS(/*model*/ MODEL_TWEESTER,        /*pos*/  1017, -200,  3832, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(0x19), /*bhv*/ bhvTweester, /*acts*/ ACT_4 | ACT_5 | ACT_6),
     OBJECT_WITH_ACTS(/*model*/ MODEL_TWEESTER,        /*pos*/  3066, -200,   400, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(0x19), /*bhv*/ bhvTweester, /*acts*/ ACT_4 | ACT_5 | ACT_6),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_KLEPTO,          /*pos*/  2200, 1174, -2820, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_1) | BPARAM2(0x01), /*bhv*/ bhvKlepto,   /*acts*/ ACT_1),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_KLEPTO,          /*pos*/ -5963,  573, -4784, /*angle*/ 0, 0, 0, /*bhvParam*/ 0, /*bhv*/ bhvKlepto,   /*acts*/ ACT_2 | ACT_3 | ACT_4 | ACT_5 | ACT_6),
     RETURN(),
 };
 

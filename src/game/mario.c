@@ -787,12 +787,6 @@ static u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actio
             m->forwardVel *= 0.8f;
             break;
 
-        case ACT_BACKFLIP:
-            m->marioObj->header.gfx.animInfo.animID = -1;
-            m->forwardVel = -16.0f;
-            set_mario_y_vel_based_on_fspeed(m, 62.0f, 0.0f);
-            break;
-
         case ACT_TRIPLE_JUMP:
             set_mario_y_vel_based_on_fspeed(m, 65.0f, 0.0f);
             m->forwardVel *= 0.8f;
@@ -1775,13 +1769,7 @@ void init_mario(void) {
 
     gMarioState->invincTimer = 0;
 
-    if (save_file_get_flags()
-        & (SAVE_FLAG_CAP_ON_GROUND | SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI
-           | SAVE_FLAG_CAP_ON_MR_BLIZZARD)) {
-        gMarioState->flags = 0;
-    } else {
-        gMarioState->flags = (MARIO_NORMAL_CAP | MARIO_CAP_ON_HEAD);
-    }
+    gMarioState->flags = (MARIO_NORMAL_CAP | MARIO_CAP_ON_HEAD);
 
     gMarioState->forwardVel = 0.0f;
     gMarioState->squishTimer = 0;
@@ -1832,18 +1820,6 @@ void init_mario(void) {
 
     vec3f_copy(gMarioState->marioObj->header.gfx.pos, gMarioState->pos);
     vec3s_set(gMarioState->marioObj->header.gfx.angle, 0, gMarioState->faceAngle[1], 0);
-
-    if (save_file_get_cap_pos(capPos)) {
-        capObject = spawn_object(gMarioState->marioObj, MODEL_MARIOS_CAP, bhvNormalCap);
-
-        capObject->oPosX = capPos[0];
-        capObject->oPosY = capPos[1];
-        capObject->oPosZ = capPos[2];
-
-        capObject->oForwardVelS32 = 0;
-
-        capObject->oMoveAngleYaw = 0;
-    }
 }
 
 void init_mario_from_save_file(void) {

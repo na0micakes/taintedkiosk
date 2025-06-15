@@ -16,7 +16,6 @@
 #include "flame/geo.inc.c"
 #include "blue_fish/geo.inc.c"
 #include "leaves/geo.inc.c"
-#include "mario_cap/geo.inc.c"
 #include "number/geo.inc.c"
 #include "mushroom_1up/geo.inc.c"
 #include "star/geo.inc.c"

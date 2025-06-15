@@ -96,8 +96,6 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_FLAG_UNLOCKED_BITFS_DOOR    /* 0x00008000 */ (1 << 15)
 #define SAVE_FLAG_CAP_ON_GROUND          /* 0x00010000 */ (1 << 16)
 #define SAVE_FLAG_CAP_ON_KLEPTO          /* 0x00020000 */ (1 << 17)
-#define SAVE_FLAG_CAP_ON_UKIKI           /* 0x00040000 */ (1 << 18)
-#define SAVE_FLAG_CAP_ON_MR_BLIZZARD     /* 0x00080000 */ (1 << 19)
 #define SAVE_FLAG_UNLOCKED_50_STAR_DOOR  /* 0x00100000 */ (1 << 20)
 #define SAVE_FLAG_COLLECTED_TOAD_STAR_1  /* 0x01000000 */ (1 << 24)
 #define SAVE_FLAG_COLLECTED_TOAD_STAR_2  /* 0x02000000 */ (1 << 25)
@@ -146,7 +144,6 @@ void save_file_set_cap_pos(s16 x, s16 y, s16 z);
 s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
-void save_file_move_cap_to_default_location(void);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);

@@ -186,7 +186,6 @@ chan_freelayer 1
 chan_freelayer 2
 chan_setval 0
 chan_iowriteval 5
-chan_setreverb 0
 chan_setpan 64
 chan_setpanmix 127
 chan_ioreadval 4
@@ -231,15 +230,6 @@ chan_ioreadval 1 // IO slots 0-3 are reset to -1 when read; restore the value
 chan_iowriteval 0
 chan_break // break out of the loop
 chan_break // force the caller to return immediately
-chan_end
-
-// Set reverb in way that takes area echo level and volume into account. This
-// is done by writing to IO slot 5 and letting get_sound_reverb in external.c
-// do the necessary math.
-.set_reverb:
-chan_writeseq_nextinstr 0, 1
-chan_setreverb 10
-chan_iowriteval 5
 chan_end
 
 .channel0_table:
@@ -1138,7 +1128,6 @@ layer_end
 chan_setbank 3
 chan_setinstr 3
 chan_setval 50
-chan_call .set_reverb
 chan_setenvelope .envelope_3324
 chan_setlayer 0, .layer_68F
 chan_delay 1
@@ -1175,7 +1164,6 @@ layer_end
 chan_setbank 2
 chan_setinstr 2
 chan_setval 20
-chan_call .set_reverb
 chan_setlayer 0, .layer_6C1
 chan_setlayer 1, .layer_6B9
 chan_end
@@ -1811,7 +1799,6 @@ layer_jump .layer_A9C
 chan_setbank 9
 chan_setinstr 3
 chan_setval 40
-chan_call .set_reverb
 chan_setenvelope .envelope_3344
 chan_setlayer 0, .layer_AB3
 chan_end
@@ -2074,11 +2061,7 @@ chan_setlayer 0, .layer_C3C
 chan_end
 
 .layer_C3C:
-#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
-  layer_transpose 2
-#endif
-layer_portamento 0x82, 41, 127
-layer_note1 37, 0x14, 127
+layer_note1 39, 0x34, 127
 layer_end
 
 .sound_mario_jump_wah:
@@ -2113,11 +2096,7 @@ chan_setlayer 0, .layer_C6C
 chan_end
 
 .layer_C6C:
-#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
-  layer_transpose 1
-#endif
-layer_portamento 0x82, 44, 200
-layer_note1 39, 0x30, 127
+layer_note1 39, 0x40, 127
 layer_end
 
 .sound_mario_yahoo:
@@ -2127,11 +2106,8 @@ chan_setlayer 0, .layer_C7C
 chan_end
 
 .layer_C7C:
-layer_transpose -2
 layer_somethingon
-layer_portamento 0x85, 39, 255
-layer_note1 42, 0x1e, 110
-layer_note1 39, 0x41, 110
+layer_note1 39, 0x64, 127
 layer_end
 
 .sound_mario_uh:
@@ -2296,7 +2272,6 @@ chan_setlayer 0, .layer_D5E
 chan_end
 
 .layer_D5E:
-layer_transpose -2
 layer_note1 39, 0xc8, 127
 layer_end
 
@@ -2683,7 +2658,6 @@ layer_jump .layer_C4E
   chan_setbank 10
   chan_setinstr 23
   chan_setval 20
-  chan_call .set_reverb
   chan_setlayer 0, .layer_F8A
   chan_setlayer 1, .layer_F8A
   chan_end
@@ -3056,7 +3030,7 @@ chan_setlayer 0, .layer_11E4
 chan_end
 
 .layer_11E4:
-layer_note1 39, 0x40, 120
+layer_note1 39, 0x50, 120
 layer_end
 
 .sound_general_coin_water:
@@ -3065,7 +3039,6 @@ chan_setinstr 3
 chan_setenvelope .envelope_3358
 chan_setvibratoextent 12
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_1242
 chan_setlayer 1, .layer_1254
 chan_setval 1
@@ -3157,7 +3130,6 @@ layer_end
 chan_setbank 7
 chan_setinstr 1
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_12AF
 chan_setlayer 1, .layer_12AF
 chan_setval 6
@@ -3323,7 +3295,6 @@ layer_end
 chan_setbank 9
 chan_setinstr 3
 chan_setval 20
-chan_call .set_reverb
 chan_setlayer 0, .layer_13B2
 chan_end
 
@@ -3389,10 +3360,6 @@ layer_end
 chan_setbank 9
 chan_setinstr 3
 chan_setval 40
-chan_call .set_reverb
-#if defined(VERSION_SH) || defined(VERSION_CN)
-  chan_setreverb 40
-#endif
 chan_setlayer 0, .layer_141A
 chan_end
 
@@ -3411,7 +3378,6 @@ layer_end
 chan_setbank 9
 chan_setinstr 3
 chan_setval 40
-chan_call .set_reverb
 chan_setlayer 0, .layer_1436
 chan_end
 
@@ -3429,7 +3395,6 @@ layer_end
 chan_setbank 4
 chan_setinstr 9
 chan_setval 50
-chan_call .set_reverb
 chan_setlayer 0, .layer_1463
 chan_setval 13
 chan_call .delay
@@ -3449,7 +3414,6 @@ layer_end
 chan_setbank 1
 chan_setinstr 1
 chan_setval 15
-chan_call .set_reverb
 chan_setlayer 0, .layer_148A
 chan_setval 1
 chan_call .delay
@@ -3475,7 +3439,6 @@ chan_setbank 7
   chan_setinstr 14
 #endif
 chan_setval 15
-chan_call .set_reverb
 chan_setlayer 0, .layer_14C6
 chan_setlayer 1, .layer_14E3
 #ifndef VERSION_JP
@@ -3535,7 +3498,6 @@ chan_setbank 3
 chan_setinstr 5
 chan_setenvelope .envelope_32D4
 chan_setval 10
-chan_call .set_reverb
 chan_setlayer 0, .layer_150E
 chan_end
 
@@ -3547,7 +3509,6 @@ layer_end
 
 .chan_1519:
 chan_setval 10
-chan_call .set_reverb
 chan_setlayer 0, .layer_152B
 chan_setlayer 1, .layer_1529
 chan_setbank 4
@@ -3582,7 +3543,6 @@ layer_end
 chan_setbank 4
 chan_setinstr 3
 chan_setval 30
-chan_call .set_reverb
 chan_setlayer 0, .layer_1558
 chan_end
 
@@ -3596,7 +3556,6 @@ chan_setbank 5
 chan_setinstr 5
 chan_setenvelope .envelope_3344
 chan_setval 20
-chan_call .set_reverb
 chan_setlayer 0, .layer_1571
 chan_end
 
@@ -3649,7 +3608,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 1
 chan_setval 55
-chan_call .set_reverb
 chan_setlayer 0, .layer_15C6
 chan_end
 
@@ -3697,7 +3655,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 1
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_160C
 chan_end
 
@@ -3745,7 +3702,6 @@ layer_end
 chan_setbank 4
 chan_setinstr 15
 chan_setval 30
-chan_call .set_reverb
 chan_setlayer 0, .layer_1660
 chan_setlayer 1, .layer_1669
 chan_setlayer 2, .layer_1665
@@ -3777,7 +3733,6 @@ layer_end
 chan_setbank 4
 chan_setinstr 15
 chan_setval 30
-chan_call .set_reverb
 chan_setenvelope .envelope_338C
 chan_setlayer 0, .layer_16A1
 chan_setlayer 1, .layer_16AA
@@ -3804,7 +3759,6 @@ layer_end
 chan_setbank 5
 chan_setinstr 0
 chan_setval 127
-chan_call .set_reverb
 chan_setlayer 0, .layer_16CE
 chan_setlayer 1, .layer_16CE
 chan_setlayer 2, .layer_16D2
@@ -3847,7 +3801,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 1
 chan_setval 55
-chan_call .set_reverb
 chan_setlayer 0, .layer_170B
 chan_end
 
@@ -4075,7 +4028,6 @@ layer_end
 chan_setbank 9
 chan_setinstr 3
 chan_setval 30
-chan_call .set_reverb
 chan_setlayer 0, .layer_1888
 chan_end
 
@@ -4190,7 +4142,6 @@ chan_setbank 5
 chan_setinstr 13
 chan_setenvelope .envelope_33DC
 chan_setval 20
-chan_call .set_reverb
 chan_setval 127
 chan_iowriteval 7
 chan_setlayer 0, .layer_195F
@@ -4267,7 +4218,6 @@ layer_end
 chan_setbank 9
 chan_setinstr 3
 chan_setval 40
-chan_call .set_reverb
 chan_setenvelope .envelope_3344
 chan_setlayer 0, .layer_19DA
 chan_end
@@ -4360,7 +4310,6 @@ layer_end
 chan_setbank 9
 chan_setinstr 6
 chan_setval 10
-chan_call .set_reverb
 chan_setlayer 0, .layer_1A66
 chan_setlayer 1, .layer_1A66
 chan_end
@@ -4515,7 +4464,6 @@ sound_ref .sound_env_waterfall1
 chan_setbank 5
 chan_setinstr 1
 chan_setval 25
-chan_call .set_reverb
 #ifdef VERSION_JP
   chan_setenvelope .envelope_32E4
 #else
@@ -4697,7 +4645,6 @@ chan_setbank 5
 chan_setinstr 5
 chan_setenvelope .envelope_3368
 chan_setval 45
-chan_call .set_reverb
 chan_setlayer 0, .layer_1C82
 chan_end
 
@@ -4850,7 +4797,6 @@ layer_jump .layer_1D77
 
 .chan_1D81:
 chan_setval 50
-chan_call .set_reverb
 chan_setbank 4
 chan_setinstr 15
 chan_setlayer 0, .layer_1DA5
@@ -5135,7 +5081,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 1
 chan_setval 60
-chan_call .set_reverb
 chan_setlayer 0, .layer_1F9D
 chan_setlayer 1, .layer_1FA6
 chan_end
@@ -5155,7 +5100,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 2
 chan_setval 10
-chan_call .set_reverb
 chan_setlayer 0, .layer_1FC0
 chan_setlayer 1, .layer_1FBC
 chan_end
@@ -5172,7 +5116,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 2
 chan_setval 10
-chan_call .set_reverb
 chan_setlayer 0, .layer_1FD8
 chan_setlayer 1, .layer_1FD4
 chan_end
@@ -5190,7 +5133,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 4
 chan_setval 10
-chan_call .set_reverb
 chan_setlayer 0, .layer_1FED
 chan_end
 
@@ -5254,7 +5196,6 @@ layer_end
 chan_setbank 7
 chan_setinstr 12
 chan_setval 55
-chan_call .set_reverb
 chan_setlayer 0, .layer_2055
 chan_setval 1
 chan_call .delay
@@ -5554,7 +5495,6 @@ chan_setbank 9
 chan_setinstr 3
 chan_setenvelope .envelope_3428
 chan_setval 10
-chan_call .set_reverb
 chan_setlayer 0, .layer_21F4
 chan_end
 
@@ -5592,7 +5532,6 @@ layer_end
 chan_setbank 7
 chan_setinstr 3
 chan_setval 15
-chan_call .set_reverb
 chan_setlayer 0, .layer_2231
 chan_end
 
@@ -5685,7 +5624,6 @@ chan_setbank 0
 chan_setinstr 4
 chan_setenvelope .envelope_32D4
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_22C7
 chan_end
 
@@ -5730,7 +5668,6 @@ layer_end
 chan_setbank 9
 chan_setinstr 3
 chan_setval 20
-chan_call .set_reverb
 chan_setenvelope .envelope_33EC
 chan_setlayer 0, .layer_230F
 chan_end
@@ -5870,7 +5807,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 9
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_23EF
 chan_setlayer 1, .layer_23EF
 chan_end
@@ -5984,7 +5920,6 @@ layer_end
 chan_setbank 7
 chan_setinstr 9
 chan_setval 20
-chan_call .set_reverb
 chan_setlayer 0, .layer_249F
 chan_end
 
@@ -6007,7 +5942,6 @@ layer_end
 chan_setbank 7
 chan_setinstr 9
 chan_setval 20
-chan_call .set_reverb
 chan_setlayer 0, .layer_24C7
 chan_end
 
@@ -6083,7 +6017,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 9
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_253E
 chan_end
 
@@ -6106,7 +6039,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 2
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_2564
 chan_setlayer 1, .layer_2562
 chan_end
@@ -6138,7 +6070,6 @@ layer_jump .layer_11BB
 chan_setbank 9
 chan_setinstr 3
 chan_setval 24
-chan_call .set_reverb
 chan_setenvelope .envelope_3428
 chan_setvibratoextent 80
 chan_setvibratorate 60
@@ -6358,7 +6289,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 9
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_271A
 chan_setlayer 1, .layer_271A
 chan_end
@@ -6464,7 +6394,6 @@ layer_end
 chan_setbank 4
 chan_setinstr 15
 chan_setval 40
-chan_call .set_reverb
 chan_setenvelope .envelope_33BC
 chan_setlayer 0, .layer_27CB
 chan_end
@@ -6481,7 +6410,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 1
 chan_setval 55
-chan_call .set_reverb
 chan_setlayer 0, .layer_204E
 chan_end
 
@@ -7276,7 +7204,6 @@ chan_setpanmix 0
 chan_setinstr 3
 chan_setenvelope .envelope_3454
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_2D53
 chan_end
 
@@ -7358,7 +7285,6 @@ chan_setmutebhv 0x0
 chan_setbank 9
 chan_setinstr 1
 chan_setval 60
-chan_call .set_reverb
 chan_setlayer 0, .layer_2DDF
 chan_end
 
@@ -7390,7 +7316,6 @@ chan_setenvelope .envelope_3358
 chan_setvibratoextent 3
 chan_setvibratorate 60
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_2E28
 chan_setlayer 1, .layer_2E3D
 chan_setlayer 2, .layer_2E34
@@ -7429,7 +7354,6 @@ chan_setpanmix 0
 chan_setinstr 3
 chan_setenvelope .envelope_3454
 chan_setval 25
-chan_call .set_reverb
 chan_setpanmix 0
 chan_stereoheadseteffects 1
 chan_setlayer 0, .layer_2E65
@@ -7456,7 +7380,6 @@ chan_setinstr 2
 chan_setpanmix 0
 chan_stereoheadseteffects 1
 chan_setval 30
-chan_call .set_reverb
 chan_setenvelope .envelope_33BC
 chan_setdecayrelease 220
 chan_setlayer 0, .layer_2EA3
@@ -7504,7 +7427,6 @@ chan_setinstr 2
   chan_setval 30
   .set EXIT_PIPE_NOTE_VELOCITY, 126
 #endif
-chan_call .set_reverb
 chan_setenvelope .envelope_3464
 chan_setdecayrelease 220
 chan_setlayer 0, .layer_2EF4
@@ -7555,7 +7477,6 @@ layer_end
 chan_setbank 6
 chan_setinstr 9
 chan_setval 25
-chan_call .set_reverb
 chan_setlayer 0, .layer_271D
 chan_setlayer 1, .layer_271D
 chan_end
@@ -7606,7 +7527,6 @@ chan_setnotepriority 14
 chan_setpanmix 0
 chan_setinstr 3
 chan_setenvelope .envelope_340C
-chan_setreverb 30
 chan_setlayer 0, .layer_3032
 chan_setlayer 1, .layer_2FB9
 chan_end
@@ -7760,7 +7680,6 @@ chan_setnotepriority 14
 chan_setpanmix 0
 chan_setinstr 3
 chan_setenvelope .envelope_340C
-chan_setreverb 30
 chan_setlayer 0, .layer_3041
 chan_setlayer 1, .layer_2FC9
 chan_end
@@ -7874,7 +7793,6 @@ chan_end
 chan_setbank 5
 chan_setinstr 9
 chan_setval 40
-chan_call .set_reverb
 chan_setlayer 0, .layer_31B3
 chan_end
 
@@ -7895,7 +7813,6 @@ layer_end
 chan_setbank 5
 chan_setinstr 10
 chan_setval 60
-chan_call .set_reverb
 chan_setlayer 0, .layer_31EB
 chan_end
 
@@ -7918,7 +7835,6 @@ layer_end
 chan_setbank 5
 chan_setinstr 12
 chan_setval 30
-chan_call .set_reverb
 chan_setlayer 0, .layer_3221
 chan_end
 
@@ -7941,7 +7857,6 @@ layer_end
 .sound_air_castle_outdoors_ambient:
 chan_setbank 5
 chan_setval 15
-chan_call .set_reverb
 chan_setlayer 0, .layer_3259
 chan_setlayer 1, .layer_327F
 chan_setlayer 2, .layer_3281

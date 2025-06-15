@@ -27,11 +27,6 @@ static const LevelScript script_func_local_1[] = {
     RETURN(),
 };
 
-static const LevelScript script_func_local_2[] = {
-    OBJECT(/*model*/ MODEL_CAP_SWITCH, /*pos*/ 4506,  26, -6246, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM2(0x02), /*bhv*/ bhvCapSwitch),
-    RETURN(),
-};
-
 static const LevelScript script_func_local_3[] = {
     OBJECT(/*model*/ MODEL_NONE,       /*pos*/ 4600, 250, -4500, /*angle*/ 0, 0, 0, /*bhvParam*/ BPARAM1(STAR_INDEX_ACT_1), /*bhv*/ bhvHiddenRedCoinStar),
     RETURN(),
@@ -48,7 +43,6 @@ const LevelScript level_vcutm_entry[] = {
     ALLOC_LEVEL_POOL(),
     MARIO(/*model*/ MODEL_MARIO, /*bhvParam*/ BPARAM4(0x01), /*bhv*/ bhvMario),
     JUMP_LINK(script_func_global_1),
-    JUMP_LINK(script_func_global_9),
     LOAD_MODEL_FROM_GEO(MODEL_VCUTM_SEESAW_PLATFORM, vcutm_geo_0001F0),
     LOAD_MODEL_FROM_GEO(MODEL_VCUTM_WARP_PIPE,       warp_pipe_geo),
 
@@ -60,7 +54,6 @@ const LevelScript level_vcutm_entry[] = {
         WARP_NODE(/*id*/ WARP_NODE_DEATH,      /*destLevel*/ LEVEL_CASTLE_GROUNDS, /*destArea*/ 1, /*destNode*/ WARP_NODE_06, /*flags*/ WARP_NO_CHECKPOINT),
         JUMP_LINK(script_func_local_3),
         JUMP_LINK(script_func_local_1),
-        JUMP_LINK(script_func_local_2),
         TERRAIN(/*terrainData*/ vcutm_seg7_collision),
         MACRO_OBJECTS(/*objList*/ vcutm_seg7_macro_objs),
         SHOW_DIALOG(/*index*/ 0x00, DIALOG_129),
